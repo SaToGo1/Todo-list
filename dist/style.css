@@ -1,0 +1,17 @@
+:root{
+    --color-black: #000000;
+}
+
+html {
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif, Georgia;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body{
+    margin: 0;
+    height: 100vh;
+}

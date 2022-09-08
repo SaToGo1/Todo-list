@@ -1,0 +1,1 @@
+(()=>{const e=document.createElement("h3");e.textContent="Webpack setup for to-do list",document.querySelector("body").append(e)})();
