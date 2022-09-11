@@ -1,7 +1,7 @@
 :root{
     --color-background: #FDFDFD;
     --color-grey-background: #EEE;
-    --color-grey-light: #FAFAFA;
+    --color-grey-light: #F9F9F9;
 }
 
 html {
@@ -114,4 +114,8 @@ h1 {
 
     position: relative;
     z-index: 100;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
