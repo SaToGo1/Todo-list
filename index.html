@@ -14,7 +14,7 @@
     <main class="main">
         <nav class="sidebar">
             <div class="sidebar__times">
-                <div class="sidebar__container sidebar__container-active">
+                <div class="sidebar__container sidebar__container-active" id="sidebar__home">
                     <img src="./img/icon.svg" alt="icon" class="sidebar__icon">
                     <button class="sidebar__button">Home</button>
                 </div>
@@ -25,6 +25,10 @@
                 <div class="sidebar__container">
                     <img src="./img/icon.svg" alt="icon" class="sidebar__icon">
                     <button class="sidebar__button">Week</button>
+                </div>
+                <div class="sidebar__container">
+                    <img src="./img/icon.svg" alt="icon" class="sidebar__icon">
+                    <button class="sidebar__button">Month</button>
                 </div>
             </div>
             <div class="sidebar__projects">
@@ -45,7 +49,28 @@
                 </div>
             </div>
         </nav>
-        <section class="content">section</section>
+        <section class="content">
+            <div class="content__page">
+                <h2>Home</h2>
+                <div class="content__addTaskContainer">
+                    <button class="content__add">+</button>
+                    <input type="text" class="content__input">
+                </div>
+                <h3>Tasks</h3>
+                <div class="content__tasklist">
+                    <div class="content__task">
+                        <span class="contentTask__icon"></span>
+                        <p class="contentTask__text">This is a task</p>
+                        <button class="contentTask__delete">X</button>
+                    </div>
+                    <div class="content__task">
+                        <span class="contentTask__icon"></span>
+                        <p class="contentTask__text">This is a second task</p>
+                        <button class="contentTask__delete">X</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <footer class="footer">
         <div>Copyright© 2022 <a href="https://github.com/SaToGo1">SaToGo1</a></div>

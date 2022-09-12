@@ -2,6 +2,7 @@
     --color-background: #FDFDFD;
     --color-grey-background: #EEE;
     --color-grey-light: #F9F9F9;
+    --color-blue: #00F;
 }
 
 html {
@@ -49,8 +50,92 @@ h1 {
 .content{
     min-width: max(300px, calc(100% - 300px));
     background-color: var(--color-grey-background);
+
+    padding: 20px 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.content__page {
+    width: min(1000px, 100%);
+}
+.content__addTaskContainer{
+    display: flex;
+    gap: 10px;
+
+    background-color: var(--color-background);
+    border-radius: 50px;
+}
+
+/* REMEMBER TO ADD THIS LATER TO THE INPUT*/
+.content__addTaskContainer--focus{
+    outline: 1px solid var(--color-blue);
+}
+
+.content__add{
+    background-color: var(--color-background);
+    padding: 10px 0px 10px 20px;
+    border: none;
+
+    outline: none;
+    width: 40px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.content__input {
+    width: 100%;
+    padding: 10px 5px 10px 0px;
+
+    background-color: var(--color-background);
+    border: none;
+    outline: none;
+    border-radius: 50px;
+}
+
+.content__tasklist{
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.content__task{
+    background-color: var(--color-background);
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    border-radius: 5px;
+
+    padding: 10px 20px;
+}
+
+.contentTask__icon{
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.contentTask__text{
+    margin: 0;
+}
+
+.contentTask__delete {
+    height: 22px;
+    background-color: inherit;
+    border: none;
+
+    padding: 0px 5px;
+
+    margin-left: auto;
+    cursor: pointer;
+}
 /******************************************************/
 /******************************************************/
 /****             sideBar                          ****/
