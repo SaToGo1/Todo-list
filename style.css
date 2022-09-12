@@ -84,9 +84,10 @@ h1 {
     gap: 5px;
 }
 
+
 .sidebar__button {
     padding: 10px 20px;
-    width: 250px;
+    /*width: 250px;*/
     height: 40px;
 
     background-color: var(--color-white);
@@ -95,11 +96,33 @@ h1 {
     border-radius: 5px;
 }
 
-.sidebar__button:hover {
+.sidebar__container {
+    padding: 10px 20px;
+    width: 250px;
+    height: 40px;
+
+    background-color: var(--color-white);
+    border: none;
+
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+}
+
+.sidebar__container:hover {
     background-color: var(--color-grey-light);
     border: 1px solid var(--color-grey-background);
 
     cursor: pointer;
+}
+
+.sidebar__icon{
+    width: 20px;
+}
+
+.sidebar__addProject{
+    margin-top: 10px;
 }
 /******************************************************/
 /******************************************************/
