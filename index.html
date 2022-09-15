@@ -43,10 +43,18 @@
                     <button class="sidebar__button">Project 2</button>
                     <button class="sidebar__delete">X</button>
                 </div>
-                <div class="sidebar__container sidebar__addProject">
+                <div class="sidebar__container sidebar__addProject" id="addProjectContainer">
                     <img src="./img/icon.svg" alt="icon" class="sidebar__icon">
-                    <button class="sidebar__button">Add Project</button>
+                    <button class="sidebar__button" id="addProject">Add Project</button>
                 </div>
+
+                <div class=".sidebar__container-addingProject sidebar__addProject">
+                    <label for="sidebar__ProjectNameInput">Project Name:</label>
+                    <input type="text" id="sidebar__ProjectNameInput">
+                    <button class="sidebar__button sidebar__accept" id="sidebar__accept">Accept</button>
+                    <button class="sidebar__button sidebar__cancel" id="sidebar__cancel">Cancel</button>
+                </div>
+
             </div>
         </nav>
         <section class="content">

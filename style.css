@@ -230,6 +230,40 @@ h1 {
     margin-left: auto;
     cursor: pointer;
 }
+
+/*********************
+ADDING PROJECT PROCESS
+**********************/
+.sidebar__container-addingProject {
+    padding: 10px 20px;
+    width: 250px;
+    height: 100px;
+
+    background-color: var(--color-white);
+    border: none;
+
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#sidebar__ProjectNameInput{
+    margin-top: 4px;
+    width: 100%;
+}
+
+.sidebar__accept{
+    background-color: green;
+    margin-top: 5px;
+}
+
+.sidebar__cancel{
+    background-color: red;
+    margin-top: 5px;
+}
+
 /******************************************************/
 /******************************************************/
 /****             Footer                           ****/
