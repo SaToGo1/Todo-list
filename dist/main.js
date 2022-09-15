@@ -1,0 +1,1 @@
+(()=>{"use strict";(new class{constructor(){this.addProjectButton=document.getElementById("addProject"),this.addProjectContainer=document.getElementById("addProjectContainer")}addProjectClick=t=>{this.addProjectButton.addEventListener("click",(()=>{this.addProjectContainer.innerHTML="\n    <div>\n        <input type=text>\n    </div>"}))}}).addProjectClick()})();
