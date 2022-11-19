@@ -19,7 +19,9 @@ export default class addProject {
             let redButton = document.getElementById("sidebar__cancel");
 
             // Cancel new project and show again add Project button
-            //redButton.addEventListener('click', this.addAcceptCancelClick(redButton, greenButton));
+            redButton.addEventListener('click', () => {
+                this.addCancelClick(addingProjectDiv)
+            });
 
             //Event for the accept button(green) -> create a new project
             greenButton.addEventListener('click', ()=>{
@@ -31,16 +33,34 @@ export default class addProject {
 
     // TODO create addEventListeners for New Project buttons.
     addAcceptClick = (addingProjectDiv) => {
+        //ChildNodes[1] => input from adding Project
+        //we check if input(name of the project) has more than 0 character.
+        if(addingProjectDiv.childNodes[1].textLength > 0 ){
+            //Create div with new project and add to the DOM.
+            let newProjectDiv = CreateNewProjectElements();
+            this.addProjectSidebarContainer.append(newProjectDiv);
 
-        //Create div with new project and add to the DOM.
-        let newProjectDiv = CreateNewProjectElements();
-        this.addProjectSidebarContainer.append(newProjectDiv);
+            //Put add project button as last item in the sidebar project section.
+            this.addProjectButtonContainer.parentNode.appendChild(this.addProjectButtonContainer);
 
+            //display add project button as visible again.
+            this.addProjectButtonContainer.style.display = 'flex';
+
+            //delete adding project DIV.
+            addingProjectDiv.remove();
+        }
+        //0 characters.
+        else{
+            alert("Project name has to have between 1 and 20 characters.")
+        }
+    }
+
+    addCancelClick = (addingProjectDiv) => {
         //Put add project button as last item in the sidebar project section.
         this.addProjectButtonContainer.parentNode.appendChild(this.addProjectButtonContainer);
 
         //display add project button as visible again.
-        this.addProjectButtonContainer.style.display = 'initial';
+        this.addProjectButtonContainer.style.display = 'flex';
 
         //delete adding project DIV.
         addingProjectDiv.remove();
@@ -61,6 +81,8 @@ function CreateAddingProjectNameElements(){
     let input = document.createElement('input');
     input.type = "text";
     input.id = "sidebar__ProjectNameInput";
+    input.maxLength = 20;
+    input.minLength = 1;
 
     let greenButton = document.createElement('button');
     greenButton.classList.add("sidebar__button", "sidebar__accept");
