@@ -41,7 +41,9 @@ export default class addProject {
 
     addDeleteClick = (button) => {
         button.addEventListener('click', () => {
-            button.parentNode.remove();
+            let isExecuted = confirm("Are you sure you wanna delete the project?");
+            
+            if(isExecuted) button.parentNode.remove();
         })
     }
 
