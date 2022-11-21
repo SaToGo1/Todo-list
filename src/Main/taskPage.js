@@ -1,13 +1,19 @@
 export default class taskPage {
     constructor(){
-        this.addTaskDiv = document.getElementById("addTaskDiv");
-        //this.addTaskButton = this.addTaskDiv.childNodes[0];
-        //this.addTaskName = this.addTaskDiv.childNodes[1];
+        this.addTaskDiv = document.getElementById("addTask__Div");
+        this.addTaskButton = document.getElementById("addTask__button");
+        this.addTaskName = document.getElementById("addTask__text");
+
+        this.taskList = document.getElementById("tasklist");
         
     }
 
     addTaskEvent = () => {
+        this.addTaskButton.addEventListener('click', ()=>{
+            let taskDiv = CreateNewTaskElements(this.addTaskName.value);
 
+            this.taskList.append(taskDiv);
+        })
     }
 
 }
@@ -25,8 +31,8 @@ function CreateNewTaskElements(name){
     p.textContent = name;
 
     let button = document.createElement('button');
-    p.className = "contentTask__delete";
-    p.textContent = "X";
+    button.className = "contentTask__delete";
+    button.textContent = "X";
 
     div.append(icon);
     div.append(p);
