@@ -5,12 +5,21 @@ export default class addProject {
 
         //Confusing name (?)
         this.addProjectSidebarContainer = document.getElementById("sidebar__projects");
+
+        //Search for delete buttons of already existing project and add funcionality.
+        this.DeleteButton = document.getElementsByClassName("sidebar__delete");
+        if(this.DeleteButton){
+            for(let i = 0, len = this.DeleteButton.length; i < len; i++){
+                this.addDeleteClick(this.DeleteButton[i]);
+            }
+        }
     }
 
     addProjectClick = (action) => {
         this.addProjectButton.addEventListener('click', ()=>{
             let addingProjectDiv = CreateAddingProjectNameElements();
 
+            //hide add project button and show adding project div.
             this.addProjectButtonContainer.style.display = 'none';
             this.addProjectSidebarContainer.append(addingProjectDiv);
 
@@ -26,16 +35,21 @@ export default class addProject {
             //Event for the accept button(green) -> create a new project
             greenButton.addEventListener('click', ()=>{
                 this.addAcceptClick(addingProjectDiv)
-            }); 
-            
+            });   
         })
+    }
+
+    addDeleteClick = (button) => {
+        
     }
 
     // TODO create addEventListeners for New Project buttons.
     addAcceptClick = (addingProjectDiv) => {
         //ChildNodes[1] => input from adding Project
         //we check if input(name of the project) has more than 0 character.
-        if(addingProjectDiv.childNodes[1].textLength > 0 ){
+        let projectName = addingProjectDiv.childNodes[1].textLength;
+
+        if( projectName > 0 && projectName < 20){
             //Create div with new project and add to the DOM.
             let newProjectDiv = CreateNewProjectElements();
             this.addProjectSidebarContainer.append(newProjectDiv);
@@ -49,9 +63,9 @@ export default class addProject {
             //delete adding project DIV.
             addingProjectDiv.remove();
         }
-        //0 characters.
+        //0 characters or 20+ character.
         else{
-            alert("Project name has to have between 1 and 20 characters.")
+            alert("Project name must have between 1 and 20 characters.");
         }
     }
 

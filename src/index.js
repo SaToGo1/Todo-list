@@ -1,5 +1,5 @@
 //import view from "./view/view";
-import DOMaddProject from "./DOM/addProject";
+import DOMaddProject from "./SideBar/addProject";
 
 
 // This class has to be initialized only 1 time.
