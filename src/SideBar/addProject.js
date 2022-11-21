@@ -40,7 +40,9 @@ export default class addProject {
     }
 
     addDeleteClick = (button) => {
-        
+        button.addEventListener('click', () => {
+            button.parentNode.remove();
+        })
     }
 
     // TODO create addEventListeners for New Project buttons.
@@ -53,6 +55,10 @@ export default class addProject {
             //Create div with new project and add to the DOM.
             let newProjectDiv = CreateNewProjectElements();
             this.addProjectSidebarContainer.append(newProjectDiv);
+
+            //Add Function to Delete button
+            let DeleteButton = newProjectDiv.childNodes[2];
+            this.addDeleteClick(DeleteButton);
 
             //Put add project button as last item in the sidebar project section.
             this.addProjectButtonContainer.parentNode.appendChild(this.addProjectButtonContainer);
