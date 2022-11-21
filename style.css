@@ -125,6 +125,18 @@ h1 {
     cursor: pointer;
 }
 
+.contentTask__icon-active{
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+
+    background-color: black;
+
+    outline: 1px solid black;
+}
+
 .contentTask__text{
     margin: 0;
 }
