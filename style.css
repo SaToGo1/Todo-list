@@ -3,6 +3,9 @@
     --color-grey-background: #EEE;
     --color-grey-light: #F9F9F9;
     --color-blue: #00F;
+
+    --color-Delete-Button: #777;
+    --color-Hover-Delete-Button: #000;
 }
 
 html {
@@ -229,6 +232,13 @@ h1 {
 
     margin-left: auto;
     cursor: pointer;
+
+    border-radius: 50%;
+    color: var(--color-Delete-Button);
+}
+
+.sidebar__delete:hover {
+    color: var(--color-Hover-Delete-Button);
 }
 
 /*********************
