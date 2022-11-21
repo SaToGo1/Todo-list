@@ -1,8 +1,17 @@
 //import view from "./view/view";
-import DOMaddProject from "./SideBar/addProject";
+import addProject from "./SideBar/addProject";
 
+//import taskPage from "./Main/taskPage";
 
 // This class has to be initialized only 1 time.
-let addProject = new DOMaddProject();
+let addProjectObj = new addProject();
 
-addProject.addProjectClick();
+addProjectObj.addProjectClick();
+
+//let taskPage = new taskPage();
+
+
+/*
+let Home = new taskPage();
+let Today = new taskPage();
+*/

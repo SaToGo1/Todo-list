@@ -5,14 +5,6 @@ export default class addProject {
 
         //Confusing name (?)
         this.addProjectSidebarContainer = document.getElementById("sidebar__projects");
-
-        //Search for delete buttons of already existing project and add funcionality.
-        this.DeleteButton = document.getElementsByClassName("sidebar__delete");
-        if(this.DeleteButton){
-            for(let i = 0, len = this.DeleteButton.length; i < len; i++){
-                this.addDeleteClick(this.DeleteButton[i]);
-            }
-        }
     }
 
     addProjectClick = (action) => {
