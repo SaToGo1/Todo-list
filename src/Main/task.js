@@ -1,5 +1,6 @@
 export default class task {
-    constructor(){
-        
+    constructor(text){
+        this.text = text;
+        this.completed = false;
     }
 }

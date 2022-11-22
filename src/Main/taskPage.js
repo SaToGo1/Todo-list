@@ -1,3 +1,5 @@
+import taskDataMod from "./taskData";
+
 export default class taskPage {
     constructor(){
         this.addTaskDiv = document.getElementById("addTask__Div");
@@ -6,16 +8,30 @@ export default class taskPage {
 
         this.taskList = document.getElementById("tasklist");
         
+        
+        this.taskData = new taskDataMod();
+        /*if(this.taskArray){
+            for(...)
+        }*/
     }
 
+    //Controls the + button of the task input.
     addTaskEvent = () => {
         this.addTaskButton.addEventListener('click', ()=>{
-            let taskDiv = CreateNewTaskElements(this.addTaskName.value);
+            
+            let taskTitle = this.addTaskName.value;
+
+            this.taskData.saveTask(taskTitle);
+            let taskDiv = CreateNewTaskElements(taskTitle);
 
             this.taskList.append(taskDiv);
         })
     }
 
+    //Will show the tasks saved in array.
+    displayTasks = () => {
+        return 1;
+    }
 }
 
 function CreateNewTaskElements(name){
