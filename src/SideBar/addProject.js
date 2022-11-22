@@ -51,7 +51,7 @@ export default class addProject {
             this.addProjectSidebarContainer.append(newProjectDiv);
 
             //Add Function to Delete button
-            let DeleteButton = newProjectDiv.childNodes[2];
+            let DeleteButton = newProjectDiv.childNodes[2]; //maybe i should change this
             this.addDeleteClick(DeleteButton);
 
             //Put add project button as last item in the sidebar project section.

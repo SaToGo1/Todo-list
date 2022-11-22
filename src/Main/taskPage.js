@@ -21,10 +21,11 @@ export default class taskPage {
             
             let taskTitle = this.addTaskName.value;
 
-            this.taskData.saveTask(taskTitle);
-            let taskDiv = CreateNewTaskElements(taskTitle);
-
-            this.taskList.append(taskDiv);
+            //if name is not repeated, save task append into task list.
+            if(this.taskData.saveTask(taskTitle)){
+                let taskDiv = CreateNewTaskElements(taskTitle);
+                this.taskList.append(taskDiv);
+            }
         })
     }
 

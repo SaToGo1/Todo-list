@@ -1,6 +1,10 @@
 export default class task {
-    constructor(text){
-        this.text = text;
+    constructor(title){
+        this.title = title;
         this.completed = false;
+    }
+
+    getTitle = () => {
+        return this.title;
     }
 }
