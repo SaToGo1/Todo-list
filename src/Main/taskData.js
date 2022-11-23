@@ -25,4 +25,12 @@ export default class taskData {
     changeCompleteStatus = () => {
 
     }
+
+    deleteTask = (taskTitle) => {
+        for(let i = 0, length = this.taskArray.length; i < length; i++){
+            if(taskTitle == this.taskArray[i].getTitle()){
+                this.taskArray.splice(i, 1);
+            }
+        }
+    }
 }

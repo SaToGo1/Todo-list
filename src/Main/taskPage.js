@@ -25,6 +25,9 @@ export default class taskPage {
             if(this.taskData.saveTask(taskTitle)){
                 let taskDiv = CreateNewTaskElements(taskTitle);
                 this.taskList.append(taskDiv);
+
+                //add event to the delete button
+                this.addDeleteEvent(taskDiv);
             }
         })
     }
@@ -32,6 +35,15 @@ export default class taskPage {
     //Will show the tasks saved in array.
     displayTasks = () => {
         return 1;
+    }
+
+    addDeleteEvent = (taskDiv) => {
+        let taskTitle = this.addTaskName.value;
+        let deleteButton = taskDiv.getElementsByTagName('button')[0]
+        deleteButton.addEventListener('click', () => {
+            taskDiv.remove();
+            this.taskData.deleteTask(taskTitle);
+        })
     }
 }
 
