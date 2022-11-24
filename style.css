@@ -6,6 +6,10 @@
 
     --color-Delete-Button: #777;
     --color-Hover-Delete-Button: #000;
+
+    --color-task-completed: rgba(206, 9, 9, 0.712);
+
+
 }
 
 html {
@@ -150,6 +154,10 @@ h1 {
 
     margin-left: auto;
     cursor: pointer;
+}
+
+.contentTask__textdashed p{
+    text-decoration: line-through var(--color-task-completed);
 }
 /******************************************************/
 /******************************************************/
