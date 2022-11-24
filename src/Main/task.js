@@ -7,4 +7,9 @@ export default class task {
     getTitle = () => {
         return this.title;
     }
+
+    changeCompletion = () => {
+        this.completed = !this.completed;
+        return this.completed;
+    }
 }

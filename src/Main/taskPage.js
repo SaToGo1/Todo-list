@@ -28,11 +28,13 @@ export default class taskPage {
 
                 //add event to the delete button
                 this.addDeleteEvent(taskDiv);
+                //add event to the completion button
+                this.addCompletionEvent(taskDiv);
             }
         })
     }
 
-    //Will show the tasks saved in array.
+    //Will show the tasks saved in array on the page.
     displayTasks = () => {
         return 1;
     }
@@ -44,6 +46,33 @@ export default class taskPage {
             taskDiv.remove();
             this.taskData.deleteTask(taskTitle);
         })
+    }
+
+    //change style.
+    addCompletionEvent = (taskDiv) => {
+        //Select button O(or icon) to the left of the task.
+        let completionButton = taskDiv.getElementsByTagName('span')[0]
+        let taskTitle = this.addTaskName.value;
+        
+        completionButton.addEventListener('click', () => {
+            this.changeCompletion(taskDiv, taskTitle, completionButton);
+        })
+    }
+
+    changeCompletion = (taskDiv, taskTitle, completionButton) => {
+        //calls the change of completion and gets if status is true or false.
+        let completed = this.taskData.changeCompleteStatus(taskTitle);
+        if(completed){
+            //style a
+            completionButton.classList.remove('contentTask__icon');
+            completionButton.classList.add('contentTask__icon-active');
+            taskDiv.classList.add('contentTask__textdashed');
+        }else{
+            completionButton.classList.add('contentTask__icon');
+            completionButton.classList.remove('contentTask__icon-active');
+            taskDiv.classList.remove('contentTask__textdashed');
+        }
+        
     }
 }
 
