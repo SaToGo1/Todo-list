@@ -200,7 +200,18 @@ h1 {
 
 .sidebar__button {
     padding: 10px 20px;
-    /*width: 250px;*/
+    height: 40px;
+
+    background-color: var(--color-white);
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.sidebar__addProjectButton {
+    padding: 10px 20px;
     height: 40px;
 
     background-color: var(--color-white);
