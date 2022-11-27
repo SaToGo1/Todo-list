@@ -119,7 +119,7 @@ function CreateTaskPageElements(){
     div.className = "content__page";
 
     let h2 = document.createElement('h2');
-    h2.textContent = "Home on the second page";
+    h2.textContent = "Home";
 
     let div2 = document.createElement('div');
     div2.className = "content__addTaskContainer";
