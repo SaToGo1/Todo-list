@@ -33,11 +33,6 @@ export default class taskPage {
         })
     }
 
-    //Will show the tasks saved in array on the page.
-    displayTasks = () => {
-        return 1;
-    }
-
     addDeleteEvent = (taskDiv) => {
         let taskTitle = this.addTaskName.value;
         let deleteButton = taskDiv.getElementsByTagName('button')[0]
@@ -82,8 +77,27 @@ export default class taskPage {
         this.addTaskButton = document.getElementById("addTask__button");
         this.addTaskName = document.getElementById("addTask__text");
         this.taskList = document.getElementById("tasklist");
-
+        
+        this.displayTasks();
         this.addTaskEvent();
+    }
+
+    displayTasks = () => {
+        let length = this.taskData.getTasksLength();
+        for(let i = 0; i < length; i++){
+            let title = this.taskData.getTaskTitleOnIndex(i);
+            let taskDiv = CreateNewTaskElements(title);
+            this.taskList.append(taskDiv);
+            this.taskFunctionality(taskDiv);
+
+        }
+    }
+
+    taskFunctionality = (taskDiv) => {
+         //add event to the delete button
+         this.addDeleteEvent(taskDiv);
+         //add event to the completion button
+         this.addCompletionEvent(taskDiv);
     }
 }
 

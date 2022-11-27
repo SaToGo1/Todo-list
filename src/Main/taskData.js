@@ -3,9 +3,6 @@ import taskMod from "./task";
 export default class taskData {
     constructor(){        
         this.taskArray = [];
-        /*if(this.taskArray){
-            for(...)
-        }*/
     }
 
     //TO DO( return boolean and false if title repeated.)
@@ -40,5 +37,13 @@ export default class taskData {
                 }
             }
         }
+    }
+
+    getTasksLength = () => {
+        return this.taskArray.length;
+    }
+
+    getTaskTitleOnIndex = (i) => {
+        return this.taskArray[i].getTitle();
     }
 }
