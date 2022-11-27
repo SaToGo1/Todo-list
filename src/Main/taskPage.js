@@ -1,7 +1,8 @@
 import taskDataMod from "./taskData";
 
 export default class taskPage {
-    constructor(){
+    constructor(name){
+        this.pageName = name;
         this.addTaskDiv = document.getElementById("addTask__Div");
         this.addTaskButton = document.getElementById("addTask__button");
         this.addTaskName = document.getElementById("addTask__text");
@@ -34,7 +35,7 @@ export default class taskPage {
     }
 
     addDeleteEvent = (taskDiv) => {
-        let taskTitle = this.addTaskName.value;
+        let taskTitle = taskDiv.getElementsByTagName('p')[0].textContent;
         let deleteButton = taskDiv.getElementsByTagName('button')[0]
         deleteButton.addEventListener('click', () => {
             taskDiv.remove();
@@ -46,7 +47,7 @@ export default class taskPage {
     addCompletionEvent = (taskDiv) => {
         //Select button O(or icon) to the left of the task.
         let completionButton = taskDiv.getElementsByTagName('span')[0]
-        let taskTitle = this.addTaskName.value;
+        let taskTitle = taskDiv.getElementsByTagName('p')[0].textContent;
         
         completionButton.addEventListener('click', () => {
             this.changeCompletion(taskDiv, taskTitle, completionButton);
@@ -71,22 +72,26 @@ export default class taskPage {
 
     loadPage = () => {
         this.content.innerHTML = " ";
-        this.content.append(CreateTaskPageElements());
+        this.content.append(CreateTaskPageElements(this.pageName));
 
         this.addTaskDiv = document.getElementById("addTask__Div");
         this.addTaskButton = document.getElementById("addTask__button");
         this.addTaskName = document.getElementById("addTask__text");
         this.taskList = document.getElementById("tasklist");
         
-        this.displayTasks();
         this.addTaskEvent();
+        this.displayTasks();
     }
 
     displayTasks = () => {
         let length = this.taskData.getTasksLength();
         for(let i = 0; i < length; i++){
             let title = this.taskData.getTaskTitleOnIndex(i);
+            console.log("getTitleOnIndex");
+            console.log(this.taskData.getTaskTitleOnIndex(i));
             let taskDiv = CreateNewTaskElements(title);
+            console.log(taskDiv.getElementsByTagName('p'));
+
             this.taskList.append(taskDiv);
             this.taskFunctionality(taskDiv);
 
@@ -94,6 +99,8 @@ export default class taskPage {
     }
 
     taskFunctionality = (taskDiv) => {
+        console.log(taskDiv.getElementsByTagName('p'));
+        console.log(taskDiv)
          //add event to the delete button
          this.addDeleteEvent(taskDiv);
          //add event to the completion button
@@ -124,7 +131,7 @@ function CreateNewTaskElements(name){
     return div;
 }
 
-function CreateTaskPageElements(){
+function CreateTaskPageElements(pageName){
     
     //let section = document.createElement('section');
     //div.className = "content";
@@ -133,7 +140,7 @@ function CreateTaskPageElements(){
     div.className = "content__page";
 
     let h2 = document.createElement('h2');
-    h2.textContent = "Home";
+    h2.textContent = pageName;
 
     let div2 = document.createElement('div');
     div2.className = "content__addTaskContainer";
@@ -150,6 +157,7 @@ function CreateTaskPageElements(){
     input.type = "text";
 
     let h3 = document.createElement('h3');
+    h3.textContent = "Tasks"
 
     let div3 = document.createElement('div');
     div3.className = "content__tasklist";

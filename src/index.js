@@ -7,13 +7,13 @@ import taskPage from "./Main/taskPage";
 let addProjectObj = new addProject();
 addProjectObj.addProjectClick();
 
-let home = new taskPage();
+let home = new taskPage("Home");
 home.loadPage();
 
 
-let today = new taskPage();
-let week = new taskPage();
-let month = new taskPage();
+let today = new taskPage("Today");
+let week = new taskPage("Week");
+let month = new taskPage("Month");
 
 let sidebarButtonArray = document.getElementsByClassName('sidebar__button');
 
