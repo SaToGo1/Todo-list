@@ -13,7 +13,12 @@ let taskPg = new taskPage();
 
 taskPg.addTaskEvent();
 
-/*
+
 let Home = new taskPage();
-let Today = new taskPage();
-*/
+
+Home.loadPage();
+//let Today = new taskPage();
+
+//let sidebarButton = document.getElementsByClassName('sidebar__button');
+//for()
+
