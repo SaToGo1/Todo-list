@@ -46,4 +46,12 @@ export default class taskData {
     getTaskTitleOnIndex = (i) => {
         return this.taskArray[i].getTitle();
     }
+
+    getCompleteStatus = (taskTitle) => {
+        let completed = true;
+        for(let i = 0, length = this.taskArray.length; i < length; i++){
+            if(taskTitle == this.taskArray[i].getTitle()) completed = this.taskArray[i].getCompletion();
+        }
+        return completed;
+    }
 }

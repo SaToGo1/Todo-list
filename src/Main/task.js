@@ -12,4 +12,8 @@ export default class task {
         this.completed = !this.completed;
         return this.completed;
     }
+
+    getCompletion = () => {
+        return this.completed;
+    }
 }

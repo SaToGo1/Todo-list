@@ -89,6 +89,16 @@ export default class taskPage {
             let title = this.taskData.getTaskTitleOnIndex(i);
             let taskDiv = CreateNewTaskElements(title);
 
+            //checking completion
+            let completedTask = this.taskData.getCompleteStatus(title);
+            let completionButton = taskDiv.getElementsByTagName('span')[0];
+            //if the task is complete apply complete style.
+            if(completedTask){
+                completionButton.classList.remove('contentTask__icon');
+                completionButton.classList.add('contentTask__icon-active');
+                taskDiv.classList.add('contentTask__textdashed');
+            }
+
             this.taskList.append(taskDiv);
             this.taskFunctionality(taskDiv);
         }
