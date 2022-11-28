@@ -87,20 +87,14 @@ export default class taskPage {
         let length = this.taskData.getTasksLength();
         for(let i = 0; i < length; i++){
             let title = this.taskData.getTaskTitleOnIndex(i);
-            console.log("getTitleOnIndex");
-            console.log(this.taskData.getTaskTitleOnIndex(i));
             let taskDiv = CreateNewTaskElements(title);
-            console.log(taskDiv.getElementsByTagName('p'));
 
             this.taskList.append(taskDiv);
             this.taskFunctionality(taskDiv);
-
         }
     }
 
     taskFunctionality = (taskDiv) => {
-        console.log(taskDiv.getElementsByTagName('p'));
-        console.log(taskDiv)
          //add event to the delete button
          this.addDeleteEvent(taskDiv);
          //add event to the completion button

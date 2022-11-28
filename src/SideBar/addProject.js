@@ -45,7 +45,7 @@ export default class addProject {
         //we check if input(name of the project) has more than 0 character.
         let projectName = addingProjectDiv.childNodes[1].textLength;
 
-        if( projectName > 0 && projectName < 21){
+        if( projectName > 0 && projectName < 21 ){
             //Create div with new project and add to the DOM.
             let newProjectDiv = CreateNewProjectElements();
             this.addProjectSidebarContainer.append(newProjectDiv);
