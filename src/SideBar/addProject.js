@@ -1,3 +1,4 @@
+import projectDataMod from "./projectData";
 export default class addProject {
     constructor(){
         this.addProjectButton = document.getElementById("addProject");
@@ -5,6 +6,8 @@ export default class addProject {
 
         //Confusing name (?)
         this.addProjectSidebarContainer = document.getElementById("sidebar__projects");
+
+        this.projectData = new projectDataMod();
     }
 
     addProjectClick = (action) => {
@@ -59,6 +62,9 @@ export default class addProject {
 
             //display add project button as visible again.
             this.addProjectButtonContainer.style.display = 'flex';
+
+            //save the project into project data module.
+            this.projectData.saveProject(projectName);
 
             //delete adding project DIV.
             addingProjectDiv.remove();

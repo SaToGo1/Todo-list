@@ -3,17 +3,18 @@ export default class projectData {
         this.projectArray = [];
     }
 
-    /*
     saveProject = (title) => {
         let proj = new project(title);
         this.projectArray.push(proj);
-    }*/
-
-
+    }
 }
 
-/*class project {
+class project {
     constructor(title){
         this.title = title;
     }
-}*/
+
+    getTitle = () => {
+        return this.title;
+    }
+}
