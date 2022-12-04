@@ -3,11 +3,22 @@ export default class projectData {
         this.projectArray = [];
     }
 
-    saveProject = (title) => {
-        let proj = new project(title);
+    saveProject = (projectTitle) => {
+        let proj = new project(projectTitle);
         this.projectArray.push(proj);
     }
+
+    deleteProject = (projectTitle) => {
+        for(let i = 0, length = this.projectArray.length; i < length; i++){
+            if(this.projectArray[i]){
+                if(projectTitle == this.projectArray[i].getTitle()){
+                    this.projectArray.splice(i, 1);
+                }
+            }
+        }
+    }
 }
+
 
 class project {
     constructor(title){

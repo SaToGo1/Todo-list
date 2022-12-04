@@ -34,11 +34,15 @@ export default class addProject {
         })
     }
 
-    addDeleteClick = (button) => {
+    addDeleteClick = (projectName, button) => {
         button.addEventListener('click', () => {
             let isExecuted = confirm("Are you sure you wanna delete the project?");
             
-            if(isExecuted) button.parentNode.remove();
+            if(isExecuted){ 
+                this.projectData.deleteProject(projectName);
+                
+                button.parentNode.remove();
+            }
         })
     }
 
@@ -55,7 +59,7 @@ export default class addProject {
 
             //Add Function to Delete button
             let DeleteButton = newProjectDiv.childNodes[2]; //maybe i should change this
-            this.addDeleteClick(DeleteButton);
+            this.addDeleteClick(projectName, DeleteButton);
 
             //Put add project button as last item in the sidebar project section.
             this.addProjectButtonContainer.parentNode.appendChild(this.addProjectButtonContainer);
