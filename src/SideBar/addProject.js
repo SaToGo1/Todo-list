@@ -101,11 +101,13 @@ export default class addProject {
     }
 
     projectLoadPageEvent = (newProjectDiv, projectName, deleteButton) => {
+        let projectPage = new taskPageMod(projectName);
+        let index = this.taskPageArray.push(projectPage);
+
         newProjectDiv.addEventListener('click', (event)=>{
             //this event runs in all the div but the delete button.
             if(event.target !== deleteButton){
-                let projectPage = new taskPageMod(projectName);
-                projectPage.loadPage();
+                this.taskPageArray[index - 1].loadPage();
             }
         })
     }
