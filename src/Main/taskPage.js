@@ -21,15 +21,19 @@ export default class taskPage {
             
             let taskTitle = this.addTaskName.value;
 
+            if(taskTitle.length > 0 && taskTitle.length < 91){
             //if name is not repeated, save task append into task list.
-            if(this.taskData.saveTask(taskTitle)){
-                let taskDiv = CreateNewTaskElements(taskTitle);
-                this.taskList.append(taskDiv);
+                if(this.taskData.saveTask(taskTitle)){
+                    let taskDiv = CreateNewTaskElements(taskTitle);
+                    this.taskList.append(taskDiv);
 
-                //add event to the delete button
-                this.addDeleteEvent(taskDiv);
-                //add event to the completion button
-                this.addCompletionEvent(taskDiv);
+                    //add event to the delete button
+                    this.addDeleteEvent(taskDiv);
+                    //add event to the completion button
+                    this.addCompletionEvent(taskDiv);
+                }
+            } else{
+                alert("Project name must have between 1 and 90 characters.");
             }
         })
     }
