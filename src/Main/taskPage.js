@@ -163,6 +163,7 @@ function CreateTaskPageElements(pageName){
     input.className = "content__input";
     input.id = "addTask__text";
     input.type = "text";
+    input.maxLength = 90;
 
     let h3 = document.createElement('h3');
     h3.textContent = "Tasks"

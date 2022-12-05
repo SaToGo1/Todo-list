@@ -22,7 +22,6 @@ export default class  {
             })
         }
 
-        //Care to see if it actualizes with new projects.
         //Event to change the active sidebar button.
         let sidebarContainerArray = document.getElementsByClassName('sidebar__container');
         for(let i = 0, len = sidebarContainerArray.length; i < len; i++){

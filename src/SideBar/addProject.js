@@ -1,4 +1,6 @@
 import projectDataMod from "./projectData";
+import taskPageMod from "../Main/taskPage";
+
 export default class addProject {
     constructor(){
         this.addProjectButton = document.getElementById("addProject");
@@ -8,6 +10,7 @@ export default class addProject {
         this.addProjectSidebarContainer = document.getElementById("sidebar__projects");
 
         this.projectData = new projectDataMod();
+        this.taskPageArray = [];
     }
 
     addProjectClick = (action) => {
@@ -34,32 +37,21 @@ export default class addProject {
         })
     }
 
-    addDeleteClick = (projectName, button) => {
-        button.addEventListener('click', () => {
-            let isExecuted = confirm("Are you sure you wanna delete the project?");
-            
-            if(isExecuted){ 
-                this.projectData.deleteProject(projectName);
-                
-                button.parentNode.remove();
-            }
-        })
-    }
-
     // TODO create addEventListeners for New Project buttons.
     addAcceptClick = (addingProjectDiv) => {
         //ChildNodes[1] => input from adding Project
         //we check if input(name of the project) has more than 0 character.
-        let projectName = addingProjectDiv.childNodes[1].textLength;
+        let projectNameLen = addingProjectDiv.childNodes[1].textLength;
+        let projectName = addingProjectDiv.childNodes[1].value;
 
-        if( projectName > 0 && projectName < 21 ){
+        if( projectNameLen > 0 && projectNameLen < 21 ){
             //Create div with new project and add to the DOM.
             let newProjectDiv = CreateNewProjectElements();
             this.addProjectSidebarContainer.append(newProjectDiv);
 
             //Add Function to Delete button
-            let DeleteButton = newProjectDiv.childNodes[2]; //maybe i should change this
-            this.addDeleteClick(projectName, DeleteButton);
+            let deleteButton = newProjectDiv.childNodes[2]; //maybe i should change childNodes selection(?)
+            this.addDeleteClick(projectName, deleteButton);
 
             //Put add project button as last item in the sidebar project section.
             this.addProjectButtonContainer.parentNode.appendChild(this.addProjectButtonContainer);
@@ -69,6 +61,11 @@ export default class addProject {
 
             //save the project into project data module.
             this.projectData.saveProject(projectName);
+
+            //load page when clicking on project.
+            //LOAD PAGE
+            this.projectLoadPageEvent(newProjectDiv, projectName, deleteButton);
+            this.activeStyleOnLoadPage(newProjectDiv);
 
             //delete adding project DIV.
             addingProjectDiv.remove();
@@ -90,6 +87,40 @@ export default class addProject {
         addingProjectDiv.remove();
     }
     
+
+    addDeleteClick = (projectName, button) => {
+        button.addEventListener('click', () => {
+            let isExecuted = confirm("Are you sure you wanna delete the project?");
+            
+            if(isExecuted){ 
+                this.projectData.deleteProject(projectName);
+                
+                button.parentNode.remove();
+            }
+        })
+    }
+
+    projectLoadPageEvent = (newProjectDiv, projectName, deleteButton) => {
+        newProjectDiv.addEventListener('click', (event)=>{
+            //this event runs in all the div but the delete button.
+            if(event.target !== deleteButton){
+                let projectPage = new taskPageMod(projectName);
+                projectPage.loadPage();
+            }
+        })
+    }
+
+    //mark the active page in the sidebar.
+    activeStyleOnLoadPage = (newProjectDiv) => {
+        let sidebarContainerArray = document.getElementsByClassName('sidebar__container');
+        let sidebarContainer = newProjectDiv;
+        sidebarContainer.addEventListener('click', () => {
+            for(let j = 0, len = sidebarContainerArray.length; j < len; j++){
+                sidebarContainerArray[j].classList.remove('sidebar__container-active');
+            }
+            sidebarContainer.classList.add('sidebar__container-active');
+        })
+    }
 }
 
 function CreateAddingProjectNameElements(){
