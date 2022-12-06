@@ -113,6 +113,7 @@ h1 {
     height: 40px;
 
     display: flex;
+    /*flex-wrap: wrap;*/
     align-items: center;
     gap: 15px;
 
@@ -153,7 +154,6 @@ h1 {
 
     padding: 0px 5px;
 
-    margin-left: auto;
     cursor: pointer;
     color: var(--color-Delete-Button);
 }
@@ -164,6 +164,11 @@ h1 {
 
 .contentTask__textdashed p{
     text-decoration: line-through var(--color-task-completed);
+}
+
+.contentTask__date{
+    flex-shrink: 0;
+    margin-left: auto;
 }
 /******************************************************/
 /******************************************************/
