@@ -167,7 +167,7 @@ function CreateNewProjectElements(){
     div.className = "sidebar__container";
 
     let img = document.createElement('img');
-    img.src = "./img/icon.svg";
+    img.src = "./img/tag.svg";
     img.alt = "icon";
     img.className = "sidebar__icon";
 
