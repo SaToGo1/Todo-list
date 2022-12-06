@@ -1,4 +1,6 @@
 import taskMod from "./task";
+import format from 'date-fns'
+
 
 export default class taskData {
     constructor(){        
@@ -6,24 +8,34 @@ export default class taskData {
     }
 
     //TO DO( return boolean and false if title repeated.)
-    saveTask = (taskTitle) => {
+    saveTask = (taskTitle, project) => {
         if(this.taskArray){
             for(let i = 0, length = this.taskArray.length; i < length; i++){
                 if(taskTitle == this.taskArray[i].getTitle()) return false;
             }
         }
-        let task = new taskMod(taskTitle);
+        let task = new taskMod(taskTitle, project);
         this.taskArray.push(task);
+
+        //global task array
+        globalTaskArray.push(task);
+        
 
         return true;
     }
 
-    // TO DO (will change completed from true to false or false to true).
+    //change completed from true to false or false to true.
     changeCompleteStatus = (taskTitle) => {
         let completed = true;
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             if(taskTitle == this.taskArray[i].getTitle()) completed = this.taskArray[i].changeCompletion();
         }
+
+        //global task array
+        for(let i = 0, length = globalTaskArray.length; i < length; i++){
+            if(taskTitle == globalTaskArray[i].getTitle()) globalTaskArray[i].changeCompletion();
+        }
+
         return completed;
     }
 
@@ -35,6 +47,13 @@ export default class taskData {
                 if(taskTitle == this.taskArray[i].getTitle()){
                     this.taskArray.splice(i, 1);
                 }
+            }
+        }
+
+        //globalTaskArray
+        for(let i = 0, length = globalTaskArray.length; i < length; i++){
+            if(taskTitle == globalTaskArray[i].getTitle()){
+                globalTaskArray.splice(i, 1);
             }
         }
     }
@@ -53,5 +72,13 @@ export default class taskData {
             if(taskTitle == this.taskArray[i].getTitle()) completed = this.taskArray[i].getCompletion();
         }
         return completed;
+    }
+
+    setDate = (taskTitle, dateString) => {
+
+        let date = format(new Date(dateString.value), 'yyyy/MM/dd');
+        for(let i = 0, length = this.taskArray.length; i < length; i++){
+            if(taskTitle == this.taskArray[i].getTitle()) this.taskArray[i].setDate(date);
+        }
     }
 }

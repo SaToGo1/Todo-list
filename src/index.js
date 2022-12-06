@@ -8,3 +8,5 @@ addProjectObj.addProjectClick();
 
 let mainSections = new mainSectionsClass();
 mainSections.initialize();
+
+global.globalTaskArray = []; //global

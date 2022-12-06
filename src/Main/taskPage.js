@@ -21,9 +21,9 @@ export default class taskPage {
             
             let taskTitle = this.addTaskName.value;
 
-            if(taskTitle.length > 0 && taskTitle.length < 91){
+            if(taskTitle.length > 0 && taskTitle.length < 76){
             //if name is not repeated, save task append into task list.
-                if(this.taskData.saveTask(taskTitle)){
+                if(this.taskData.saveTask(taskTitle, this.pageName)){
                     let taskDiv = CreateNewTaskElements(taskTitle);
                     this.taskList.append(taskDiv);
 
@@ -31,6 +31,8 @@ export default class taskPage {
                     this.addDeleteEvent(taskDiv);
                     //add event to the completion button
                     this.addCompletionEvent(taskDiv);
+                    //dateEvent
+                    this.addDateEvent(taskDiv);
                 }
             } else{
                 alert("Project name must have between 1 and 90 characters.");
@@ -56,6 +58,15 @@ export default class taskPage {
         completionButton.addEventListener('click', () => {
             this.changeCompletion(taskDiv, taskTitle, completionButton);
         })
+    }
+
+    addDateEvent = (taskDiv) => {
+        let dateString = taskDiv.getElementsByTagName('input')[0].value;
+        let taskTitle = taskDiv.getElementsByTagName('p')[0].textContent;
+
+        date.addEventListener('change', () => {
+            this.taskData.setDate(dateString);
+        });
     }
 
     changeCompletion = (taskDiv, taskTitle, completionButton) => {
@@ -128,12 +139,17 @@ function CreateNewTaskElements(name){
     p.className = "contentTask__text";
     p.textContent = name;
 
+    let date = document.createElement('input');
+    date.type = "date";
+    date.className = "contentTask__date"
+
     let button = document.createElement('button');
     button.className = "contentTask__delete";
     button.textContent = "X";
 
     div.append(icon);
     div.append(p);
+    div.append(date);
     div.append(button);
 
     return div;
@@ -163,7 +179,7 @@ function CreateTaskPageElements(pageName){
     input.className = "content__input";
     input.id = "addTask__text";
     input.type = "text";
-    input.maxLength = 90;
+    input.maxLength = 75;
 
     let h3 = document.createElement('h3');
     h3.textContent = "Tasks"
