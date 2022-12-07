@@ -87,7 +87,7 @@ export default class taskData {
         //globalTaskArray
         for(let i = 0, length = globalTaskArray.length; i < length; i++){
             if(taskTitle == globalTaskArray[i].getTitle()){
-                this.taskArray[i].setDate(date);
+                globalTaskArray[i].setDate(date);
             }
         }
     }
