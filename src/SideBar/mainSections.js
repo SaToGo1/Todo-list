@@ -1,11 +1,11 @@
 import taskPage from "../Main/taskPage";
 
 export default class  {
-    constructor(){        
-        this.home = new taskPage("Home");
-        this.today = new taskPage("Today");
-        this.week = new taskPage("Week");
-        this.month = new taskPage("Month");
+    constructor(taskData){        
+        this.home = new taskPage("Home", taskData);
+        this.today = new taskPage("Today", taskData);
+        this.week = new taskPage("Week", taskData);
+        this.month = new taskPage("Month", taskData);
     }
 
     initialize = () => {

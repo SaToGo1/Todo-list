@@ -2,7 +2,7 @@ import projectDataMod from "./projectData";
 import taskPageMod from "../Main/taskPage";
 
 export default class addProject {
-    constructor(){
+    constructor(taskData){
         this.addProjectButton = document.getElementById("addProject");
         this.addProjectButtonContainer = document.getElementById("addProjectContainer");
 
@@ -11,6 +11,8 @@ export default class addProject {
 
         this.projectData = new projectDataMod();
         this.taskPageArray = [];
+
+        this.taskData = taskData;
     }
 
     addProjectClick = (action) => {
@@ -101,7 +103,7 @@ export default class addProject {
     }
 
     projectLoadPageEvent = (newProjectDiv, projectName, deleteButton) => {
-        let projectPage = new taskPageMod(projectName);
+        let projectPage = new taskPageMod(projectName, this.taskData);
         let index = this.taskPageArray.push(projectPage);
 
         newProjectDiv.addEventListener('click', (event)=>{

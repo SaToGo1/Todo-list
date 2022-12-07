@@ -1,8 +1,9 @@
 export default class task {
-    constructor(title, project){
+    constructor(title, project, pageName){
         this.title = title;
         this.completed = false;
         //no use right now
+        this.pageName = pageName;
         this.project = project;
         this.date = 'noDate';
     }
@@ -26,5 +27,13 @@ export default class task {
 
     getDate = () =>{
         return this.date;
+    }
+
+    getProject = () => {
+        return this.project;
+    }
+
+    getPageName = () => {
+        return this.pageName;
     }
 }

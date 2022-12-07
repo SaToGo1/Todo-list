@@ -1,21 +1,18 @@
-import taskDataMod from "./taskData";
 import isToday from 'date-fns/isToday'
 
 
 
 export default class taskPage {
-    constructor(name){
+    constructor(name, taskData){
         this.pageName = name;
         this.addTaskDiv = document.getElementById("addTask__Div");
         this.addTaskButton = document.getElementById("addTask__button");
         this.addTaskName = document.getElementById("addTask__text");
 
         this.taskList = document.getElementById("tasklist");
-
         this.content = document.getElementById("content");
         
-        
-        this.taskData = new taskDataMod();
+        this.taskData = taskData;
     }
 
     //Controls the + button of the task input.
@@ -107,14 +104,12 @@ export default class taskPage {
         let length = this.taskData.getTasksLength();
         for(let i = 0; i < length; i++){
             let title = this.taskData.getTaskTitleOnIndex(i);
-            this.displayTask(title);
+            let pageName = this.taskData.getPageName(title);
+            if(pageName == this.pageName) this.displayTask(title);
         }
 
-        //Global Object
+        //Specific display
         this.Today();
-        /*for(let i = 0, len = globalTaskArray.length; i < len; i++){
-            console.log('Hello');
-        }*/
     }
 
     displayTask = (title) => {
@@ -140,12 +135,14 @@ export default class taskPage {
     }
 
     taskFunctionality = (taskDiv) => {
-         //add event to the delete button
-         this.addDeleteEvent(taskDiv);
-         //add event to the completion button
-         this.addCompletionEvent(taskDiv);
-
-         this.addDateEvent(taskDiv);
+        //add event to the delete button.
+        this.addDeleteEvent(taskDiv);
+        
+        //add event to the completion button.
+        this.addCompletionEvent(taskDiv);
+        
+        //add event for the date input. 
+        this.addDateEvent(taskDiv);
     }
 
     Today = () => {
@@ -155,100 +152,34 @@ export default class taskPage {
         }
         
         //Empty string, there are no tasks
-        if(globalTaskArray.length == 0){
-            console.log("Today ,no tasks")
+        if(this.taskData.getTasksLength() == 0){
+            //console.log("Today ,no tasks")
             return ;
         }
 
         //Watch for the global array of tasks if we have a tasks set for today.
-        for(let i = 0, len = globalTaskArray.length; i < len; i++){
-            let dateString = globalTaskArray[i].getDate();
-            let taskTitle = globalTaskArray[i].getTitle();
+        for(let i = 0, len = this.taskData.getTasksLength(); i < len; i++){
+            let taskTitle = this.taskData.getTaskTitleOnIndex(i);
+            let dateString = this.taskData.getDate(taskTitle);
 
             //task has a defined date?
             if(dateString == 'noDate'){
-                console.log('Today, nodate');
+                //console.log('Today, nodate');
                 continue;
             }
-            console.log("And there is a Date");
+            //console.log("And there is a Date");
             let date = new Date(dateString);
-            
-            //task exists in local array? if already exists we don't want to add duplicated tasks.
-            if(this.taskData.taskExists(taskTitle)){
-                continue;
-            }
-            console.log("And task does not exists");
 
             //we Are on the same day?
             if(!isToday(date)){
-                console.log("not Today");
+                //console.log("not Today");
                 continue;
             }
-            console.log("And we are in the same day");
+            //console.log("And we are in the same day");
 
-            this.displayTaskFromGlobalArray(taskTitle, i);
+            this.displayTask(taskTitle);
         }
     }
-
-    displayTaskFromGlobalArray = (title, i) => {
-        let taskDiv = CreateNewTaskElements(title);
-    
-        //checking completion
-        let completedTask = globalTaskArray[i].getCompletion();
-        let completionButton = taskDiv.getElementsByTagName('span')[0];
-        //if the task is complete apply complete style.
-        if(completedTask){
-            completionButton.classList.remove('contentTask__icon');
-            completionButton.classList.add('contentTask__icon-active');
-            taskDiv.classList.add('contentTask__textdashed');
-        }
-    
-        //checking Date
-        let dateInput = taskDiv.getElementsByTagName('input')[0];
-        dateInput.value = globalTaskArray[i].getDate();
-    
-        //Adding the task to the taskList.
-        this.taskList.append(taskDiv);
-        this.taskFunctionalityglobal(taskDiv, i);
-    }
-
-    //temporal, we need a massive restructuration of the code.
-    taskFunctionalityglobal = (taskDiv, i) => {
-        //add event to the delete button
-        let taskTitle = taskDiv.getElementsByTagName('p')[0].textContent;
-        let deleteButton = taskDiv.getElementsByTagName('button')[0]
-        deleteButton.addEventListener('click', () => {
-            taskDiv.remove();
-            globalTaskArray.splice(i, 1);
-        })
-        //add event to the completion button
-        //Select button O(or icon) to the left of the task.
-        let completionButton = taskDiv.getElementsByTagName('span')[0]
-        
-        completionButton.addEventListener('click', () => {
-        //calls the change of completion and gets if status is true or false.
-        let completed = globalTaskArray[i].changeCompletion();
-        if(completed){
-            //style a
-            completionButton.classList.remove('contentTask__icon');
-            completionButton.classList.add('contentTask__icon-active');
-            taskDiv.classList.add('contentTask__textdashed');
-        }else{
-            completionButton.classList.add('contentTask__icon');
-            completionButton.classList.remove('contentTask__icon-active');
-            taskDiv.classList.remove('contentTask__textdashed');
-        }
-        }) 
-
-        //this.addDateEvent(taskDiv);
-        let date = taskDiv.getElementsByTagName('input')[0];
-
-        date.addEventListener('change', () => {
-            let dateString = taskDiv.getElementsByTagName('input')[0].value;
-
-            globalTaskArray[i].setDate(dateString);
-        });
-   }
 }
 
 function CreateNewTaskElements(name){

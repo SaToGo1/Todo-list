@@ -7,19 +7,18 @@ export default class taskData {
     }
 
     //TO DO( return boolean and false if title repeated.)
-    saveTask = (taskTitle, project) => {
+    saveTask = (taskTitle, pageName, project = "NoProject") => {
         if(this.taskArray){
             for(let i = 0, length = this.taskArray.length; i < length; i++){
-                if(taskTitle == this.taskArray[i].getTitle()) return false;
+                //dont save task if Task is Repeated   
+                if(taskTitle == this.taskArray[i].getTitle()){
+                    alert("Task is repeated. in pageName: "+ this.taskArray[i].getPageName());    
+                    return false;
+                } 
             }
         }
-        let task = new taskMod(taskTitle, project);
+        let task = new taskMod(taskTitle, project, pageName);
         this.taskArray.push(task);
-
-        //global task array
-        globalTaskArray.push(task);
-        
-
         return true;
     }
 
@@ -29,12 +28,6 @@ export default class taskData {
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             if(taskTitle == this.taskArray[i].getTitle()) completed = this.taskArray[i].changeCompletion();
         }
-
-        //global task array
-        for(let i = 0, length = globalTaskArray.length; i < length; i++){
-            if(taskTitle == globalTaskArray[i].getTitle()) globalTaskArray[i].changeCompletion();
-        }
-
         return completed;
     }
 
@@ -46,13 +39,6 @@ export default class taskData {
                 if(taskTitle == this.taskArray[i].getTitle()){
                     this.taskArray.splice(i, 1);
                 }
-            }
-        }
-
-        //globalTaskArray
-        for(let i = 0, length = globalTaskArray.length; i < length; i++){
-            if(taskTitle == globalTaskArray[i].getTitle()){
-                globalTaskArray.splice(i, 1);
             }
         }
     }
@@ -74,16 +60,8 @@ export default class taskData {
     }
 
    setDate = (taskTitle, date) => {
-
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             if(taskTitle == this.taskArray[i].getTitle()) this.taskArray[i].setDate(date);
-        }
-
-        //globalTaskArray
-        for(let i = 0, length = globalTaskArray.length; i < length; i++){
-            if(taskTitle == globalTaskArray[i].getTitle()){
-                globalTaskArray[i].setDate(date);
-            }
         }
     }
 
@@ -93,10 +71,15 @@ export default class taskData {
         }
     }
 
-    taskExists = (taskTitle) => {
+    getPageName = (taskTitle) => {
         for(let i = 0, length = this.taskArray.length; i < length; i++){
-            if(taskTitle == this.taskArray[i].getTitle()) return true;
+            if(taskTitle == this.taskArray[i].getTitle())  return this.taskArray[i].getPageName();
         }
-        return false;
+    }
+
+    getProject = () => {
+        for(let i = 0, length = this.taskArray.length; i < length; i++){
+            if(taskTitle == this.taskArray[i].getTitle())  return this.taskArray[i].getProject();
+        }
     }
 }

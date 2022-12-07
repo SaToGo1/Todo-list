@@ -1,12 +1,13 @@
 import addProject from "./SideBar/addProject";
+import taskDataMod from "./Main/taskData";
 
 import mainSectionsClass from "./SideBar/mainSections"
 
-global.globalTaskArray = []; //global
+let taskData = new taskDataMod();
 
 // This class has to be initialized only 1 time.
-let addProjectObj = new addProject();
+let addProjectObj = new addProject(taskData);
 addProjectObj.addProjectClick();
 
-let mainSections = new mainSectionsClass();
+let mainSections = new mainSectionsClass(taskData);
 mainSections.initialize();
