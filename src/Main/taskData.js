@@ -1,5 +1,4 @@
 import taskMod from "./task";
-import format from 'date-fns';
 
 
 export default class taskData {
@@ -66,10 +65,6 @@ export default class taskData {
         return this.taskArray[i].getTitle();
     }
 
-    getTaskDateOnIndex = (i) => {
-        return this.taskArray[i].getDate();
-    }
-
     getCompleteStatus = (taskTitle) => {
         let completed = true;
         for(let i = 0, length = this.taskArray.length; i < length; i++){
@@ -96,5 +91,12 @@ export default class taskData {
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             if(taskTitle == this.taskArray[i].getTitle())  return this.taskArray[i].getDate();
         }
+    }
+
+    taskExists = (taskTitle) => {
+        for(let i = 0, length = this.taskArray.length; i < length; i++){
+            if(taskTitle == this.taskArray[i].getTitle()) return true;
+        }
+        return false;
     }
 }
