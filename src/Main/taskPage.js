@@ -1,5 +1,6 @@
 import isToday from 'date-fns/isToday'
-
+import isThisWeek from 'date-fns/isThisWeek'
+import isThisMonth from 'date-fns/isThisMonth'
 
 
 export default class taskPage {
@@ -110,6 +111,8 @@ export default class taskPage {
 
         //Specific display
         this.Today();
+        this.Week();
+        this.Month();
     }
 
     displayTask = (title) => {
@@ -145,6 +148,7 @@ export default class taskPage {
         this.addDateEvent(taskDiv);
     }
 
+    //look for tasks that their date is today and add them to today page
     Today = () => {
         //page Name is today
         if(!(this.pageName == "Today")){
@@ -153,29 +157,85 @@ export default class taskPage {
         
         //Empty string, there are no tasks
         if(this.taskData.getTasksLength() == 0){
-            //console.log("Today ,no tasks")
             return ;
         }
 
-        //Watch for the global array of tasks if we have a tasks set for today.
         for(let i = 0, len = this.taskData.getTasksLength(); i < len; i++){
             let taskTitle = this.taskData.getTaskTitleOnIndex(i);
             let dateString = this.taskData.getDate(taskTitle);
 
             //task has a defined date?
             if(dateString == 'noDate'){
-                //console.log('Today, nodate');
                 continue;
             }
-            //console.log("And there is a Date");
             let date = new Date(dateString);
 
             //we Are on the same day?
             if(!isToday(date)){
-                //console.log("not Today");
                 continue;
             }
-            //console.log("And we are in the same day");
+
+            this.displayTask(taskTitle);
+        }
+    }
+
+    //look for tasks that their date is in this week and add them to week page
+    Week = () => {
+        //page Name is week
+        if(!(this.pageName == "Week")){
+            return ;
+        }
+        
+        //Empty string, there are no tasks
+        if(this.taskData.getTasksLength() == 0){
+            return ;
+        }
+
+        for(let i = 0, len = this.taskData.getTasksLength(); i < len; i++){
+            let taskTitle = this.taskData.getTaskTitleOnIndex(i);
+            let dateString = this.taskData.getDate(taskTitle);
+
+            //task has a defined date?
+            if(dateString == 'noDate'){
+                continue;
+            }
+            let date = new Date(dateString);
+
+            //we Are on the same Week?
+            if(!isThisWeek(date)){
+                continue;
+            }
+
+            this.displayTask(taskTitle);
+        }
+    }
+
+    //look for tasks that their date is in this week and add them to week page
+    Month = () => {
+        //page Name is month
+        if(!(this.pageName == "Month")){
+            return ;
+        }
+        
+        //Empty string, there are no tasks
+        if(this.taskData.getTasksLength() == 0){
+            return ;
+        }
+
+        for(let i = 0, len = this.taskData.getTasksLength(); i < len; i++){
+            let taskTitle = this.taskData.getTaskTitleOnIndex(i);
+            let dateString = this.taskData.getDate(taskTitle);
+
+            //task has a defined date?
+            if(dateString == 'noDate'){
+                continue;
+            }
+            let date = new Date(dateString);
+
+            //we Are on the same Month?
+            if(!isThisMonth(date)){
+                continue;
+            }
 
             this.displayTask(taskTitle);
         }
