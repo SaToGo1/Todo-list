@@ -61,11 +61,13 @@ export default class taskPage {
     }
 
     addDateEvent = (taskDiv) => {
-        let dateString = taskDiv.getElementsByTagName('input')[0].value;
         let taskTitle = taskDiv.getElementsByTagName('p')[0].textContent;
+        let date = taskDiv.getElementsByTagName('input')[0];
 
         date.addEventListener('change', () => {
-            this.taskData.setDate(dateString);
+            let dateString = taskDiv.getElementsByTagName('input')[0].value;
+
+            this.taskData.setDate(taskTitle, dateString);
         });
     }
 
@@ -114,9 +116,19 @@ export default class taskPage {
                 taskDiv.classList.add('contentTask__textdashed');
             }
 
+            //checking Date
+            let dateInput = taskDiv.getElementsByTagName('input')[0];
+            dateInput.value = this.taskData.getTaskDateOnIndex(i);
+
+            //Adding the task to the taskList.
             this.taskList.append(taskDiv);
             this.taskFunctionality(taskDiv);
         }
+
+        //Global Object
+        /*for(let i = 0, len = globalTaskArray.length; i < len; i++){
+            console.log('Hello');
+        }*/
     }
 
     taskFunctionality = (taskDiv) => {
@@ -124,6 +136,8 @@ export default class taskPage {
          this.addDeleteEvent(taskDiv);
          //add event to the completion button
          this.addCompletionEvent(taskDiv);
+
+         this.addDateEvent(taskDiv);
     }
 }
 
@@ -198,3 +212,9 @@ function CreateTaskPageElements(pageName){
 
     return div;
 }
+
+/*
+function Today(){
+    
+}
+*/
