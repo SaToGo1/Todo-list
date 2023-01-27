@@ -1,11 +1,20 @@
 export default class projectData {
-    constructor(){        
+    constructor(){
         this.projectArray = [];
+        if (localStorage.getItem("projectArray") !== null) {
+            JSON.parse(localStorage.getItem("projectArray"), (key, value) => {
+                if(key == 'title'){
+                    let proj = new project(value);
+                    this.projectArray.push(proj);
+                }
+            })
+        }
     }
 
     saveProject = (projectTitle) => {
         let proj = new project(projectTitle);
         this.projectArray.push(proj);
+        localStorage.setItem("projectArray", JSON.stringify(this.projectArray));
     }
 
     deleteProject = (projectTitle) => {
@@ -16,6 +25,8 @@ export default class projectData {
                 }
             }
         }
+
+        localStorage.setItem("projectArray", JSON.stringify(this.projectArray));
     }
 
     isDuplicated = (projectTitle) => {
@@ -27,6 +38,14 @@ export default class projectData {
         })
 
         return bool;
+    }
+
+    getLength = () => {
+        return this.projectArray.length;
+    }
+
+    getTitleOnIndex = (i) => {
+        return this.projectArray[i].getTitle();
     }
 }
 

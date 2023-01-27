@@ -9,10 +9,14 @@ export default class addProject {
         //Confusing name (?)
         this.addProjectSidebarContainer = document.getElementById("sidebar__projects");
 
-        this.projectData = new projectDataMod();
         this.taskPageArray = [];
 
         this.taskData = taskData;
+
+        this.projectData = new projectDataMod();
+        if (localStorage.getItem("projectArray") !== null) {
+            this.loadProjectFromStorage();
+        }
     }
 
     addProjectClick = (action) => {
@@ -138,6 +142,36 @@ export default class addProject {
     deleteAllTasksInProject = (projectName, index) => {
         this.taskPageArray[index - 1].deleteAllTasksInPage(projectName);
     }
+
+    loadProjectFromStorage = () => {
+        let length = this.projectData.getLength();
+
+        for(let i = 0; i < length; i++){
+            let projectName = this.projectData.getTitleOnIndex(i);
+
+            //Create div with new project and add to the DOM.
+            let newProjectDiv = CreateNewProjectElements(projectName);
+            this.addProjectSidebarContainer.append(newProjectDiv);
+
+            //Put add project button as last item in the sidebar project section.
+            this.addProjectButtonContainer.parentNode.appendChild(this.addProjectButtonContainer);
+
+            //display add project button as visible again.
+            this.addProjectButtonContainer.style.display = 'flex';
+
+            //Delete button
+            let deleteButton = newProjectDiv.childNodes[2]; //maybe i should change childNodes selection(?)
+
+            //load page when clicking on project.
+            //LOAD PAGE
+            let index = this.projectLoadPageEvent(newProjectDiv, projectName, deleteButton);
+            this.activeStyleOnLoadPage(newProjectDiv);
+
+            //Add Function to Delete button
+            this.addDeleteClick(projectName, deleteButton, index);
+            
+        }
+    }
 }
 
 function CreateAddingProjectNameElements(){
@@ -174,9 +208,14 @@ function CreateAddingProjectNameElements(){
     return div;
 }
 
-function CreateNewProjectElements(){
-    
-    let projectName = document.getElementById("sidebar__ProjectNameInput").value;
+function CreateNewProjectElements(projectNameArg=' '){
+    let projectName;
+
+    if(projectNameArg == ' '){
+        projectName = document.getElementById("sidebar__ProjectNameInput").value;
+    }else{
+        projectName = projectNameArg;
+    }
 
     let div = document.createElement('div');
     div.className = "sidebar__container";
