@@ -51,10 +51,6 @@ export default class addProject {
             let newProjectDiv = CreateNewProjectElements();
             this.addProjectSidebarContainer.append(newProjectDiv);
 
-            //Add Function to Delete button
-            let deleteButton = newProjectDiv.childNodes[2]; //maybe i should change childNodes selection(?)
-            this.addDeleteClick(projectName, deleteButton);
-
             //Put add project button as last item in the sidebar project section.
             this.addProjectButtonContainer.parentNode.appendChild(this.addProjectButtonContainer);
 
@@ -64,10 +60,16 @@ export default class addProject {
             //save the project into project data module.
             this.projectData.saveProject(projectName);
 
+            //Delete button
+            let deleteButton = newProjectDiv.childNodes[2]; //maybe i should change childNodes selection(?)
+
             //load page when clicking on project.
             //LOAD PAGE
-            this.projectLoadPageEvent(newProjectDiv, projectName, deleteButton);
+            let index = this.projectLoadPageEvent(newProjectDiv, projectName, deleteButton);
             this.activeStyleOnLoadPage(newProjectDiv);
+
+            //Add Function to Delete button
+            this.addDeleteClick(projectName, deleteButton, index);
 
             //delete adding project DIV.
             addingProjectDiv.remove();
@@ -90,11 +92,12 @@ export default class addProject {
     }
     
 
-    addDeleteClick = (projectName, button) => {
+    addDeleteClick = (projectName, button, index) => {
         button.addEventListener('click', () => {
-            let isExecuted = confirm("Are you sure you wanna delete the project?");
+            let isExecuted = confirm("Are you sure you wanna delete the project? if you remove the project you will delete all the tasks of this project");
             
             if(isExecuted){ 
+                this.deleteAllTasksInProject(projectName, index);
                 this.projectData.deleteProject(projectName);
                 
                 button.parentNode.remove();
@@ -112,6 +115,7 @@ export default class addProject {
                 this.taskPageArray[index - 1].loadPage();
             }
         })
+        return index
     }
 
     //mark the active page in the sidebar.
@@ -124,6 +128,10 @@ export default class addProject {
             }
             sidebarContainer.classList.add('sidebar__container-active');
         })
+    }
+
+    deleteAllTasksInProject = (projectName, index) => {
+        this.taskPageArray[index - 1].deleteAllTasksInPage(projectName);
     }
 }
 

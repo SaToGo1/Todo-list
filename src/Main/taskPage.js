@@ -240,6 +240,10 @@ export default class taskPage {
             this.displayTask(taskTitle);
         }
     }
+
+    deleteAllTasksInPage = (projectName) => {
+        this.taskData.deleteAllTaskFromAPage(projectName);
+    }
 }
 
 function CreateNewTaskElements(name){

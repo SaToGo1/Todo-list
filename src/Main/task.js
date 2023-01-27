@@ -1,10 +1,9 @@
 export default class task {
-    constructor(title, project, pageName){
+    constructor(title, pageName){
         this.title = title;
         this.completed = false;
         //no use right now
         this.pageName = pageName;
-        this.project = project;
         this.date = 'noDate';
     }
 
@@ -29,9 +28,10 @@ export default class task {
         return this.date;
     }
 
-    getProject = () => {
-        return this.project;
-    }
+    //Does the same than getPageName
+    /*getProject = () => {
+        return this.pageName;
+    }*/
 
     getPageName = () => {
         return this.pageName;

@@ -7,7 +7,7 @@ export default class taskData {
     }
 
     //TO DO( return boolean and false if title repeated.)
-    saveTask = (taskTitle, pageName, project = "NoProject") => {
+    saveTask = (taskTitle, pageName) => {
         if(this.taskArray){
             for(let i = 0, length = this.taskArray.length; i < length; i++){
                 //dont save task if Task is Repeated   
@@ -17,7 +17,7 @@ export default class taskData {
                 } 
             }
         }
-        let task = new taskMod(taskTitle, project, pageName);
+        let task = new taskMod(taskTitle, pageName);
         this.taskArray.push(task);
         return true;
     }
@@ -71,15 +71,34 @@ export default class taskData {
         }
     }
 
+    //equal to getProject
     getPageName = (taskTitle) => {
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             if(taskTitle == this.taskArray[i].getTitle())  return this.taskArray[i].getPageName();
         }
     }
 
+    /*
     getProject = () => {
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             if(taskTitle == this.taskArray[i].getTitle())  return this.taskArray[i].getProject();
         }
+    }*/
+
+    deleteAllTaskFromAPage = (pageName) => {
+        let taskTitleArray = [];
+
+        this.taskArray.forEach(task => {
+            if(pageName == task.getPageName()) taskTitleArray.push(task.getTitle());
+        })
+
+        taskTitleArray.forEach( title => {
+            this.deleteTask(title);
+        })
+        /*
+        for(let i = 0; i < this.taskArray.length; i++){
+            //not very efficient :(
+            if(pageName == this.taskArray[i].getPageName()) this.deleteTask(this.taskArray[i].getTitle());
+        }*/
     }
 }
