@@ -17,6 +17,17 @@ export default class projectData {
             }
         }
     }
+
+    isDuplicated = (projectTitle) => {
+        let bool = false;
+        this.projectArray.forEach(project => {
+            if(project.getTitle() === projectTitle){
+                bool = true;
+            }
+        })
+
+        return bool;
+    }
 }
 
 

@@ -78,13 +78,6 @@ export default class taskData {
         }
     }
 
-    /*
-    getProject = () => {
-        for(let i = 0, length = this.taskArray.length; i < length; i++){
-            if(taskTitle == this.taskArray[i].getTitle())  return this.taskArray[i].getProject();
-        }
-    }*/
-
     deleteAllTaskFromAPage = (pageName) => {
         let taskTitleArray = [];
 
@@ -95,10 +88,5 @@ export default class taskData {
         taskTitleArray.forEach( title => {
             this.deleteTask(title);
         })
-        /*
-        for(let i = 0; i < this.taskArray.length; i++){
-            //not very efficient :(
-            if(pageName == this.taskArray[i].getPageName()) this.deleteTask(this.taskArray[i].getTitle());
-        }*/
     }
 }

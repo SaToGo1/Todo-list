@@ -28,11 +28,6 @@ export default class task {
         return this.date;
     }
 
-    //Does the same than getPageName
-    /*getProject = () => {
-        return this.pageName;
-    }*/
-
     getPageName = () => {
         return this.pageName;
     }
