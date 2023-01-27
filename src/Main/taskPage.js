@@ -98,6 +98,12 @@ export default class taskPage {
         this.taskList = document.getElementById("tasklist");
         
         this.addTaskEvent();
+
+        //Home page shows all the tasks we have in the array.
+        if(this.pageName == 'Home'){
+            this.displayAllTasks();
+            return 0;
+        }
         this.displayMultipleTasks();
     }
 
@@ -243,6 +249,14 @@ export default class taskPage {
 
     deleteAllTasksInPage = (projectName) => {
         this.taskData.deleteAllTaskFromAPage(projectName);
+    }
+
+    displayAllTasks = () => {
+        let length = this.taskData.getTasksLength();
+        for(let i = 0; i < length; i++){
+            let title = this.taskData.getTaskTitleOnIndex(i);
+            this.displayTask(title);
+        }
     }
 }
 
