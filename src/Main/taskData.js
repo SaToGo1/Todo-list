@@ -1,9 +1,32 @@
+//import task from "./task";
 import taskMod from "./task";
 
 
 export default class taskData {
     constructor(){        
         this.taskArray = [];
+        if (localStorage.getItem("taskArray") !== null) {
+            let task;
+            JSON.parse(localStorage.getItem("taskArray"), (key, value) => {
+
+                if(key == 'title'){
+                    task = new taskMod(value);
+                }
+
+                if(key == 'completed'){
+                    task.setCompletion(value);
+                }
+
+                if(key == 'pageName'){
+                    task.setPageName(value);
+                }
+
+                if(key == 'date'){
+                    task.setDate(value);
+                    this.taskArray.push(task);
+                }
+            })
+        }
     }
 
     //TO DO( return boolean and false if title repeated.)
@@ -19,6 +42,8 @@ export default class taskData {
         }
         let task = new taskMod(taskTitle, pageName);
         this.taskArray.push(task);
+
+        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
         return true;
     }
 
@@ -28,6 +53,8 @@ export default class taskData {
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             if(taskTitle == this.taskArray[i].getTitle()) completed = this.taskArray[i].changeCompletion();
         }
+
+        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
         return completed;
     }
 
@@ -41,6 +68,8 @@ export default class taskData {
                 }
             }
         }
+
+        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
     }
 
     getTasksLength = () => {
@@ -63,6 +92,8 @@ export default class taskData {
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             if(taskTitle == this.taskArray[i].getTitle()) this.taskArray[i].setDate(date);
         }
+
+        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
     }
 
     getDate = (taskTitle) => {
@@ -88,5 +119,7 @@ export default class taskData {
         taskTitleArray.forEach( title => {
             this.deleteTask(title);
         })
+
+        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
     }
 }

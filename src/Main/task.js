@@ -20,15 +20,23 @@ export default class task {
         return this.completed;
     }
 
-    setDate = (date) => {
-        this.date = date; 
+    setCompletion = (completion) => {
+        this.completed = completion;
     }
 
     getDate = () =>{
         return this.date;
     }
 
+    setDate = (date) => {
+        this.date = date; 
+    }
+
     getPageName = () => {
         return this.pageName;
+    }
+
+    setPageName = (pageName) => {
+        this.pageName = pageName;
     }
 }
