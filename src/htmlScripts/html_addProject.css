@@ -1,0 +1,19 @@
+.sidebar__deleteConfirmation {
+    position: fixed;
+    width: 250px;
+    background-color: var(--color-popup-background);
+    border: 2px solid var(--color-background);
+    border-radius: 5px;
+    padding: 5px 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.sidebar__deleteConfirmation-Popup {
+    display: none;
+    position: relative;
+    /* display: inline-block; */
+    cursor: pointer;
+}

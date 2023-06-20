@@ -9,7 +9,8 @@
 
     --color-task-completed: rgba(206, 9, 9, 0.712);
 
-
+    --color-popup-background: hsl(0, 0%, 90%);
+    --color-popup-shadow: hsl(0, 0%, 87%)
 }
 
 html {

@@ -1,3 +1,5 @@
+import './html_addProject.css'
+
 export function CreateAddingProjectNameElements(){
     
     let div = document.createElement('div');
@@ -57,14 +59,37 @@ export function CreateNewProjectElements(projectNameArg=' '){
     button2.className = "sidebar__delete";
     button2.textContent = "X";
 
-    // let popup = document.createElement('span');
-    // button2.textContent = "testing";
-    // // popup.display = 'none';
+    let popup = document.createElement('span');
+    popup.textContent = "testing";
+    popup.className = "sidebar__deleteConfirmation-Popup";
 
-    // button2.append(popup);
+    button2.append(popup);
     div.append(img);
     div.append(button);
     div.append(button2);
+
+    return div;
+}
+
+export function deleteConfirmationDiv({message, x, y}){
+    let div = document.createElement('div');
+    div.className = "sidebar__deleteConfirmation";
+    div.style.top = `${y - 20}px`
+    div.style.left = `${x - 20}px`
+
+    let messageElement = document.createElement('h4');
+    messageElement.textContent = message;
+
+    let acceptButton = document.createElement('button');
+    acceptButton.textContent = "Accept";
+    acceptButton.id = "sidebar__deleteConfirmation-accept"
+    let declineButton =  document.createElement('button');
+    declineButton.textContent = "Cancel";
+    declineButton.id = "sidebar__deleteConfirmation-decline"
+
+    div.append(messageElement);
+    div.append(acceptButton);
+    div.append(declineButton);
 
     return div;
 }

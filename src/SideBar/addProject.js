@@ -103,16 +103,33 @@ export default class addProject {
     
 
     addDeleteClick = (projectName, button, index) => {
-        button.addEventListener('click', () => {
-            
-            let isExecuted = confirm("Are you sure you wanna delete the project? if you remove the project you will delete all the tasks of this project");
-            
-            if(isExecuted){ 
+        button.addEventListener('click', (event) => {
+            const message = "Are you sure you wanna delete the project? \nif you remove the project you will delete all the tasks of this project."
+            let confirmDiv = deleteConfirmationDiv({
+                message,
+                x: event.clientX,
+                y: event.clientY
+            })
+            document.getElementsByTagName('body')[0].append(confirmDiv)
+
+            let isExecuted = false;
+            let buttonAccept = confirmDiv.querySelector(`button`);
+            let buttonDecline = confirmDiv.querySelector(`button~button`);
+            buttonAccept.addEventListener('click', () => {
                 this.deleteAllTasksInProject(projectName, index);
                 this.projectData.deleteProject(projectName);
                 
                 button.parentNode.remove();
-            }
+                confirmDiv.remove();
+                //TODO: if actual taskpage is = to page deleted then chagne page.
+                // if() {
+                //     this.taskPageArray[0].loadPage();
+                // }
+            })
+
+            buttonDecline.addEventListener('click', () => {
+                confirmDiv.remove();
+            })
         })
     }
 
