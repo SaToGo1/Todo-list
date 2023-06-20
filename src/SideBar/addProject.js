@@ -1,6 +1,7 @@
 import projectDataMod from "./projectData";
 import taskPageMod from "../Main/taskPage";
 import { CreateAddingProjectNameElements, CreateNewProjectElements, deleteConfirmationDiv } from '../htmlScripts/html_addProject'
+import { ProjectErrorMessage } from "./addProjectErrMessages";
 
 export default class addProject {
     constructor(taskData){
@@ -52,7 +53,7 @@ export default class addProject {
         let projectName = addingProjectDiv.childNodes[1].value;
 
         if(this.projectData.isDuplicated(projectName)){
-            alert("Project Name already exists.");
+            ProjectErrorMessage({ message: "Project Name already exists." });
             return 0;
         }
 
@@ -86,7 +87,7 @@ export default class addProject {
         }
         //0 characters or 20+ character.
         else{
-            alert("Project name must have between 1 and 20 characters.");
+            ProjectErrorMessage({ message: "Project name must have between 1 and 20 characters." });
         }
     }
 
@@ -101,7 +102,8 @@ export default class addProject {
         addingProjectDiv.remove();
     }
     
-
+    // Add delete functionality when you click the delete button on a project
+    // When you click delete project a popup will appear to confirm the action.
     addDeleteClick = (projectName, button, index) => {
         button.addEventListener('click', (event) => {
             const message = "Are you sure you wanna delete the project? \nif you remove the project you will delete all the tasks of this project."
@@ -112,21 +114,25 @@ export default class addProject {
             })
             document.getElementsByTagName('body')[0].append(confirmDiv)
 
-            let isExecuted = false;
             let buttonAccept = confirmDiv.querySelector(`button`);
             let buttonDecline = confirmDiv.querySelector(`button~button`);
+
+            // CONFIRM DELETING THE PROJECT
             buttonAccept.addEventListener('click', () => {
                 this.deleteAllTasksInProject(projectName, index);
                 this.projectData.deleteProject(projectName);
                 
                 button.parentNode.remove();
+
                 confirmDiv.remove();
+                
                 //TODO: if actual taskpage is = to page deleted then chagne page.
                 // if() {
                 //     this.taskPageArray[0].loadPage();
                 // }
             })
 
+            // CANCEL DELETING THE PROJECT
             buttonDecline.addEventListener('click', () => {
                 confirmDiv.remove();
             })
