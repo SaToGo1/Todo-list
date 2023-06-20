@@ -22,7 +22,7 @@ export default class taskPage {
             
             let taskTitle = this.addTaskName.value;
 
-            if(taskTitle.length > 0 && taskTitle.length < 76){
+            if(taskTitle.length > 0 && taskTitle.length < 75){
             //if name is not repeated, save task append into task list.
                 if(this.taskData.saveTask(taskTitle, this.pageName)){
                     let taskDiv = CreateNewTaskElements(taskTitle);
