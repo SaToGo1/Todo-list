@@ -210,6 +210,7 @@ h1 {
 .sidebar__button {
     padding: 10px 20px;
     height: 40px;
+    max-width: 170px;
 
     background-color: var(--color-white);
     border: none;
