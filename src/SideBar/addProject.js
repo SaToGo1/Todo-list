@@ -1,7 +1,7 @@
 import projectDataMod from "./projectData";
 import taskPageMod from "../Main/taskPage";
 import { CreateAddingProjectNameElements, CreateNewProjectElements, deleteConfirmationDiv } from '../htmlScripts/html_addProject'
-import { ProjectErrorMessage } from "./addProjectErrMessages";
+import { ProjectErrorMessage } from "../ErrorMessages/addProjectErrMessages";
 
 export default class addProject {
     constructor(taskData){
