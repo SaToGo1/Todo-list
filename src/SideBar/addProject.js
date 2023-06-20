@@ -1,5 +1,6 @@
 import projectDataMod from "./projectData";
 import taskPageMod from "../Main/taskPage";
+import { CreateAddingProjectNameElements, CreateNewProjectElements, deleteConfirmationDiv } from '../htmlScripts/html_addProject'
 
 export default class addProject {
     constructor(taskData){
@@ -103,6 +104,7 @@ export default class addProject {
 
     addDeleteClick = (projectName, button, index) => {
         button.addEventListener('click', () => {
+            
             let isExecuted = confirm("Are you sure you wanna delete the project? if you remove the project you will delete all the tasks of this project");
             
             if(isExecuted){ 
@@ -172,70 +174,4 @@ export default class addProject {
             
         }
     }
-}
-
-function CreateAddingProjectNameElements(){
-    
-    let div = document.createElement('div');
-    div.className = "sidebar__container-addingProject sidebar__addProject";
-    div.id = "sidebar__addingProject";
-    
-    let label = document.createElement('label');
-    label.for = "sidebar__ProjectNameInput";
-    label.textContent = "Project Name:";
-
-    let input = document.createElement('input');
-    input.type = "text";
-    input.id = "sidebar__ProjectNameInput";
-    input.maxLength = 20;
-    input.minLength = 1;
-
-    let greenButton = document.createElement('button');
-    greenButton.classList.add("sidebar__button", "sidebar__accept");
-    greenButton.id = "sidebar__accept";
-    greenButton.textContent = "Accept";
-
-    let redButton =  document.createElement('button');
-    redButton.classList.add("sidebar__button", "sidebar__cancel");
-    redButton.id = "sidebar__cancel";
-    redButton.textContent = "Cancel";
-
-    div.append(label);
-    div.append(input);
-    div.append(greenButton);
-    div.append(redButton);
-
-    return div;
-}
-
-function CreateNewProjectElements(projectNameArg=' '){
-    let projectName;
-
-    if(projectNameArg == ' '){
-        projectName = document.getElementById("sidebar__ProjectNameInput").value;
-    }else{
-        projectName = projectNameArg;
-    }
-
-    let div = document.createElement('div');
-    div.className = "sidebar__container";
-
-    let img = document.createElement('img');
-    img.src = "./img/tag.svg";
-    img.alt = "icon";
-    img.className = "sidebar__icon";
-
-    let button = document.createElement('button');
-    button.className = "sidebar__button";
-    button.textContent = projectName;
-
-    let button2 = document.createElement('button');
-    button2.className = "sidebar__delete";
-    button2.textContent = "X";
-
-    div.append(img);
-    div.append(button);
-    div.append(button2);
-
-    return div;
 }
