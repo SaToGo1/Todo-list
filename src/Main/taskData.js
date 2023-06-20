@@ -35,8 +35,12 @@ export default class taskData {
             for(let i = 0, length = this.taskArray.length; i < length; i++){
                 //dont save task if Task is Repeated   
                 if(taskTitle == this.taskArray[i].getTitle()){
-                    alert("Task is repeated. in pageName: "+ this.taskArray[i].getPageName());    
-                    return false;
+                    let pageName = this.taskArray[i].getPageName();
+                    console.log("Task is repeated. in pageName: "+ pageName);
+                    return { 
+                        taskNotRepeated: false,
+                        repeatedName: pageName
+                    };
                 } 
             }
         }
@@ -44,7 +48,7 @@ export default class taskData {
         this.taskArray.push(task);
 
         localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
-        return true;
+        return { taskNotRepeated: true, repeatedName: undefined };
     }
 
     //change completed from true to false or false to true.
