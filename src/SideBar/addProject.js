@@ -49,7 +49,7 @@ export default class addProject {
     addAcceptClick = (addingProjectDiv) => {
         //ChildNodes[1] => input from adding Project
         //we check if input(name of the project) has more than 0 character.
-        let projectNameLen = addingProjectDiv.childNodes[1].textLength;
+        let projectNameLen = addingProjectDiv.childNodes[1].value.length;
         let projectName = addingProjectDiv.childNodes[1].value;
 
         if(this.projectData.isDuplicated(projectName)){

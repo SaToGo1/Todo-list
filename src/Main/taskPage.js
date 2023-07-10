@@ -2,7 +2,7 @@ import isToday from 'date-fns/isToday'
 import isThisWeek from 'date-fns/isThisWeek'
 import isThisMonth from 'date-fns/isThisMonth'
 import { CreateNewTaskElements, CreateTaskPageElements } from '../htmlScripts/html_taskPage';
-import { TaskErrorMessage, deleteErrorMessage } from './taskPageErrMessage';
+import { TaskErrorMessage, deleteErrorMessage } from '../ErrorMessages/taskPageErrMessage';
 
 export default class taskPage {
     constructor(name, taskData){
