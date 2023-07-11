@@ -54,7 +54,7 @@ export default class taskPage {
         let deleteButton = taskDiv.getElementsByTagName('button')[0]
         deleteButton.addEventListener('click', () => {
             taskDiv.remove();
-            this.taskData.deleteTask(taskTitle);
+            this.taskData.deleteTask({ taskTitle });
         })
     }
 

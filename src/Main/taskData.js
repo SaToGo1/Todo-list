@@ -1,35 +1,15 @@
 //import task from "./task";
 import taskMod from "./task";
-
+import storeTasks from "../storage/storeTasks"
 
 export default class taskData {
     constructor(){        
         this.taskArray = [];
-        if (localStorage.getItem("taskArray") !== null) {
-            let task;
-            JSON.parse(localStorage.getItem("taskArray"), (key, value) => {
+        let { isStoredData, taskArray } = storeTasks.initialLoad()
+        if (isStoredData) this.taskArray = [...taskArray];
 
-                if(key == 'title'){
-                    task = new taskMod(value);
-                }
-
-                if(key == 'completed'){
-                    task.setCompletion(value);
-                }
-
-                if(key == 'pageName'){
-                    task.setPageName(value);
-                }
-
-                if(key == 'date'){
-                    task.setDate(value);
-                    this.taskArray.push(task);
-                }
-            })
-        }
     }
 
-    //TO DO( return boolean and false if title repeated.)
     saveTask = (taskTitle, pageName) => {
         if(this.taskArray){
             for(let i = 0, length = this.taskArray.length; i < length; i++){
@@ -47,7 +27,7 @@ export default class taskData {
         let task = new taskMod(taskTitle, pageName);
         this.taskArray.push(task);
 
-        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
+        storeTasks.saveNewTaskArray(this.taskArray);
         return { taskNotRepeated: true, repeatedName: undefined };
     }
 
@@ -58,11 +38,11 @@ export default class taskData {
             if(taskTitle == this.taskArray[i].getTitle()) completed = this.taskArray[i].changeCompletion();
         }
 
-        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
+        storeTasks.saveNewTaskArray(this.taskArray);
         return completed;
     }
 
-    deleteTask = (taskTitle) => {
+    deleteTask = ({ taskTitle, deleteAll = false }) => {
         for(let i = 0, length = this.taskArray.length; i < length; i++){
             //check if taskarray[i] exists, if we delete 1 entrance of array
             // and we check last element it will throw error we check undefined.
@@ -73,7 +53,12 @@ export default class taskData {
             }
         }
 
-        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
+        // if we are deleting all the tasks we will deal with local
+        // storage in delete all function so it don't trigger multiple
+        // local storage operations in a row.
+        if(!deleteAll){
+            storeTasks.saveNewTaskArray(this.taskArray);
+        }
     }
 
     getTasksLength = () => {
@@ -97,7 +82,7 @@ export default class taskData {
             if(taskTitle == this.taskArray[i].getTitle()) this.taskArray[i].setDate(date);
         }
 
-        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
+        storeTasks.saveNewTaskArray(this.taskArray);
     }
 
     getDate = (taskTitle) => {
@@ -121,9 +106,10 @@ export default class taskData {
         })
 
         taskTitleArray.forEach( title => {
-            this.deleteTask(title);
+            this.deleteTask({ taskTitle: title, deleteAll: true });
         })
 
-        localStorage.setItem("taskArray", JSON.stringify(this.taskArray));
+        // deleteTask already delete every task and save in local storage
+        // storeTasks.saveNewTaskArray(this.taskArray);
     }
 }
