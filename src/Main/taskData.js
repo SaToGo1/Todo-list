@@ -109,7 +109,6 @@ export default class taskData {
             this.deleteTask({ taskTitle: title, deleteAll: true });
         })
 
-        // deleteTask already delete every task and save in local storage
-        // storeTasks.saveNewTaskArray(this.taskArray);
+        storeTasks.saveNewTaskArray(this.taskArray);
     }
 }
