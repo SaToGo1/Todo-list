@@ -1,4 +1,5 @@
 import StoreProjects from "../storage/storeProjects";
+import project from "./project";
 
 export default class projectData {
     constructor(){
@@ -43,16 +44,5 @@ export default class projectData {
 
     getTitleOnIndex = (i) => {
         return this.projectArray[i].getTitle();
-    }
-}
-
-
-class project {
-    constructor(title){
-        this.title = title;
-    }
-
-    getTitle = () => {
-        return this.title;
     }
 }
