@@ -33,6 +33,9 @@ body{
 /******************************************************/
 /******************************************************/
 .header {
+    display: flex;
+    align-items: center;
+
     height: 50px;
     background-color: var(--color-background);
     box-shadow: 0px 1px 5px var(--color-grey-background);
@@ -44,6 +47,17 @@ body{
 h1 {
     margin: 0;
     margin-left: 100px;
+}
+
+.header__logIn {
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.header__profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
 }
 /******************************************************/
 /******************************************************/
@@ -167,6 +181,10 @@ h1 {
 
 .contentTask__textdashed p{
     text-decoration: line-through var(--color-task-completed);
+}
+
+.contentTask__textdashed {
+    background-color: #00000020;
 }
 
 .contentTask__date{
