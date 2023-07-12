@@ -1,0 +1,10 @@
+.header__logIn {
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.header__profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}

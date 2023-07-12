@@ -1,5 +1,6 @@
 import { signInWithGoogle } from "../services/authentication";
 import { getLoggedIn, getProfileImage, setLoggedIn } from "../config/config-variables";
+import './header-log-in.css';
 
 const LoginDiv = document.querySelector('#header__logIn');
 const LogInButton = () => document.querySelector('#header__logInButton');
