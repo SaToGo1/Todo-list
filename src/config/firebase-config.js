@@ -38,3 +38,4 @@ try {
 } catch (error) {
   console.log('error in the firebase connect \n', error)
 }
+// testing github secrets
