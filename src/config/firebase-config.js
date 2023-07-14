@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+// import { Firestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -16,25 +16,25 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-let app = null;
-let auth = null;
-let provider = null;
+export const APP = initializeApp(firebaseConfig);
+export const PROVIDER = new GoogleAuthProvider();
 
-function firebaseConnect () {
-  app = initializeApp(firebaseConfig);
-  auth = getAuth();
-  provider = new GoogleAuthProvider();
-}
 
-export function getAuthProvider () {
-  return {
-    auth,
-    provider
-  }
-}
+// function firebaseConnect () {
+//   app = initializeApp(firebaseConfig);
+//   auth = getAuth();
+//   provider = new GoogleAuthProvider();
+// }
 
-try {
-  firebaseConnect()
-} catch (error) {
-  console.log('error in the firebase connect \n', error)
-}
+// export function getAuthProvider () {
+//   return {
+//     auth,
+//     provider
+//   }
+// }
+
+// try {
+//   firebaseConnect()
+// } catch (error) {
+//   console.log('error in the firebase connect \n', error)
+// }

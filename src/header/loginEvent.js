@@ -31,7 +31,7 @@ function handleLogInClick (event) {
                 updateProfileImage()
             })
         }catch (err){
-            console.log('log in not disponible \n')
+            console.log('log in not disponible \n', err)
         }
     }
 
@@ -42,6 +42,7 @@ function handleLogInClick (event) {
         updateProfileImage()
     }
 }
+
 export const setUpLogin = () => {
     LoginDiv.addEventListener('click', handleLogInClick);
 }
