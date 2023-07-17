@@ -1,5 +1,5 @@
 import { APP, PROVIDER } from "../config/firebase-config";
-import { setLoggedIn, setProfileImage, setUser } from "../config/config-variables";
+// import { setLoggedIn, setProfileImage, setUser } from "../config/config-variables";
 import { getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 
 export function signInWithGoogle() {
@@ -15,11 +15,7 @@ export function signInWithGoogle() {
         // Handle successful authentication
         const user = result.user;
         console.log(user);
-
-        setUser(user)
-        setProfileImage(user.photoURL);
-        setLoggedIn(true);
-        console.log('set Logged In: true')
+        
         return user;
       })
       .catch((error) => {
@@ -27,27 +23,24 @@ export function signInWithGoogle() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-
-        setLoggedIn(false);
-        console.log('set Logged In: false')
       });
 }
 
-export function isUserLogged () {
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      return true;
-    } else {
-      return false;
-    }
-  });
-}
+// export function isUserLogged () {
+//   const auth = getAuth();
+//   onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//       const uid = user.uid;
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   });
+// }
 
 export function sign_out () {
   const auth = getAuth();
-  signOut(auth)
+  return signOut(auth)
     .then(() => {
       // Sign-out successful.
       console.log('sign out')
