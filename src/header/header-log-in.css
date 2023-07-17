@@ -14,7 +14,7 @@
     position: absolute;
     border-left: 5px solid var(--color-popup-background);
     border-bottom: 5px solid var(--color-popup-background);
-    background-color: red;
+    background-color: var(--color-background);
 
     right: 0px;
     top: 50px;
