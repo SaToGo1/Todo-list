@@ -1,11 +1,16 @@
 import project from "../SideBar/project";
+// import { db } from "../config/firebase-config";
+import { getUser } from "../config/user-config";
+
 
 const StoreProjects = {
     initialLoad: () => {
         let isStoredData = false;
         let projectArray = [];
 
-        if (localStorage.getItem("projectArray") !== null) {
+        if (getUser()) {
+            console.log('loggedn in') //--------------------------------------------------------
+        } else if (localStorage.getItem("projectArray") !== null) {
             isStoredData = true;
             JSON.parse(localStorage.getItem("projectArray"), (key, value) => {
                 if(key == 'title'){
@@ -22,7 +27,12 @@ const StoreProjects = {
     },
 
     saveNewProjectArray: (projectArray) => {
-        localStorage.setItem("projectArray", JSON.stringify(projectArray));
+        if (getUser()) {
+            console.log('loggedn in') //--------------------------------------------------------
+            
+        } else {
+            localStorage.setItem("projectArray", JSON.stringify(projectArray));
+        }
     }
 }
 

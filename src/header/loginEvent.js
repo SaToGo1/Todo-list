@@ -5,13 +5,13 @@ import './header-log-in.css';
 // HTML TEMPLATES
 import { LoggedInImageTemplate, logInButtonTemplate } from "../htmlScripts/html_header-log-in";
 
+// Control Variables
+import { getUser, setUser } from "../config/user-config";
+let isConfigMenuActive = false;
+
 // DOM elements
 const LoginDiv = document.querySelector('#header__logIn');
 const LogInButton = () => document.querySelector('#header__logInButton');
-
-// Control Variables
-let userVariable = null;
-let isConfigMenuActive = false;
 
 // FUNCTIONS 
 function updateProfileImage (user) {
@@ -30,7 +30,7 @@ function handleLogInClick (event) {
         try {
             signInWithGoogle()
             .then(user => {
-                userVariable = user;
+                setUser(user);
                 updateProfileImage(user);
             })
         }catch (err){
@@ -41,7 +41,7 @@ function handleLogInClick (event) {
     // LOGGED IN IMAGE -> open menu
     if(event.target.matches('#header__profile-image')) {
         isConfigMenuActive = !isConfigMenuActive;
-        updateProfileImage(userVariable);
+        updateProfileImage(getUser());
     }
 
     // SIGN OUT BUTTON
@@ -49,7 +49,7 @@ function handleLogInClick (event) {
         sign_out()
             .then(result => {
                 updateProfileImage(null);
-                userVariable = null;
+                setUser(null);
             })
     }
 }

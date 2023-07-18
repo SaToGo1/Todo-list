@@ -5,6 +5,7 @@ const storeTasks = {
         let isStoredData = false;
         let taskArray = [];
 
+        
         if (localStorage.getItem("taskArray") !== null) {
             let task;
             isStoredData = true;

@@ -2,6 +2,8 @@ import { APP, PROVIDER } from "../config/firebase-config";
 // import { setLoggedIn, setProfileImage, setUser } from "../config/config-variables";
 import { getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 
+import { createDocumentIfNotExists } from "./firestore";
+
 export function signInWithGoogle() {
     // const provider = new firebase.auth.GoogleAuthProvider();
     const auth = getAuth();
@@ -15,7 +17,8 @@ export function signInWithGoogle() {
         // Handle successful authentication
         const user = result.user;
         console.log(user);
-        
+        createDocumentIfNotExists(user);
+
         return user;
       })
       .catch((error) => {
@@ -25,18 +28,6 @@ export function signInWithGoogle() {
         console.log(errorCode, errorMessage);
       });
 }
-
-// export function isUserLogged () {
-//   const auth = getAuth();
-//   onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//       const uid = user.uid;
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   });
-// }
 
 export function sign_out () {
   const auth = getAuth();
