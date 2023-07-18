@@ -2,6 +2,9 @@ import { signInWithGoogle, sign_out } from "../services/authentication";
 // import { getLoggedIn, getProfileImage, setLoggedIn } from "../config/config-variables";
 import './header-log-in.css';
 
+// HTML TEMPLATES
+import { LoggedInImageTemplate, logInButtonTemplate } from "../htmlScripts/html_header-log-in";
+
 // DOM elements
 const LoginDiv = document.querySelector('#header__logIn');
 const LogInButton = () => document.querySelector('#header__logInButton');
@@ -10,32 +13,11 @@ const LogInButton = () => document.querySelector('#header__logInButton');
 let userVariable = null;
 let isConfigMenuActive = false;
 
-// TEMPLATES
-const configMenu = () => {
-    let menuClass = "header__userConfig";
-    if (isConfigMenuActive) menuClass = '"header__userConfig header__userConfig-active"';
-
-    return (`
-    <div class=${menuClass}>
-        <button id="header__signOutButton">Sign Out</button>
-    </div>`)
-}
-
-let LoggedInImageTemplate = (url) => {
-    return `
-    <img id="header__profile-image" class="header__profile-image" alt="Profile Image" src=${url}>
-    ${configMenu()}`
-}
-
-let logInButtonTemplate = `
-    <button class="header__logInButton" id="header__logInButton">Log in</button>
-    `
-
 // FUNCTIONS 
 function updateProfileImage (user) {
     if (user) {
         const url = user.photoURL;
-        LoginDiv.innerHTML = LoggedInImageTemplate(url)
+        LoginDiv.innerHTML = LoggedInImageTemplate({ url, isConfigMenuActive });
     } else {
         LoginDiv.innerHTML = logInButtonTemplate;
     }
@@ -49,16 +31,16 @@ function handleLogInClick (event) {
             signInWithGoogle()
             .then(user => {
                 userVariable = user;
-                updateProfileImage(user)
+                updateProfileImage(user);
             })
         }catch (err){
-            console.log('log in not disponible \n', err)
+            console.log('log in not disponible \n', err);
         }
     }
 
     // LOGGED IN IMAGE -> open menu
     if(event.target.matches('#header__profile-image')) {
-        isConfigMenuActive = !isConfigMenuActive
+        isConfigMenuActive = !isConfigMenuActive;
         updateProfileImage(userVariable);
     }
 
@@ -66,12 +48,13 @@ function handleLogInClick (event) {
     if (event.target.matches('#header__signOutButton')) {
         sign_out()
             .then(result => {
-                updateProfileImage(null)
+                updateProfileImage(null);
+                userVariable = null;
             })
     }
 }
 
 export const setUpLogin = () => {
     LoginDiv.addEventListener('click', handleLogInClick);
-    updateProfileImage(null)
+    updateProfileImage(null);
 }

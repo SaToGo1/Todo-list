@@ -18,23 +18,3 @@ const firebaseConfig = {
 
 export const APP = initializeApp(firebaseConfig);
 export const PROVIDER = new GoogleAuthProvider();
-
-
-// function firebaseConnect () {
-//   app = initializeApp(firebaseConfig);
-//   auth = getAuth();
-//   provider = new GoogleAuthProvider();
-// }
-
-// export function getAuthProvider () {
-//   return {
-//     auth,
-//     provider
-//   }
-// }
-
-// try {
-//   firebaseConnect()
-// } catch (error) {
-//   console.log('error in the firebase connect \n', error)
-// }
