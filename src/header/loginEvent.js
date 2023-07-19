@@ -34,7 +34,7 @@ function handleLogInClick ({event, taskData, addProjectObj, mainSections}) {
                 updateProfileImage(user);
                 taskData.loadTasks();
                 addProjectObj.loadProjectFromStorage();
-                mainSections.initialize();
+                mainSections.loadHome();
             })
         }catch (err){
             console.log('log in not disponible \n', err);
@@ -55,7 +55,7 @@ function handleLogInClick ({event, taskData, addProjectObj, mainSections}) {
                 setUser(null);
                 taskData.loadTasks();
                 addProjectObj.loadProjectFromStorage();
-                mainSections.initialize();
+                mainSections.loadHome();
                 
             })
     }

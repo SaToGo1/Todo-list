@@ -127,10 +127,12 @@ export default class addProject {
 
                 confirmDiv.remove();
                 
-                //TODO: if actual taskpage is = to page deleted then chagne page.
-                // if() {
-                //     this.taskPageArray[0].loadPage();
-                // }
+
+                // if actual taskpage is = to page deleted then reset content page.
+                let title = document.getElementsByClassName('content__page')[0].childNodes[0].innerText
+                if (projectName === title) {
+                    document.querySelector('.content__page').remove()
+                }
             })
 
             // CANCEL DELETING THE PROJECT
@@ -175,7 +177,7 @@ export default class addProject {
         this.taskPageArray = [];
 
         this.projectData.loadProjects();
-        
+
         let length = this.projectData.getLength();
 
         for(let i = 0; i < length; i++){

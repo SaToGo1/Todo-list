@@ -34,4 +34,14 @@ export default class  {
             })
         }
     }
+
+    loadHome = () => {
+        this.home.loadPage();
+
+        let sidebarContainerArray = document.getElementsByClassName('sidebar__container');
+        for(let j = 0, len = sidebarContainerArray.length; j < len; j++){
+            sidebarContainerArray[j].classList.remove('sidebar__container-active');
+        }
+        document.querySelector('#sidebar__home').classList.add('sidebar__container-active');
+    }
 }
