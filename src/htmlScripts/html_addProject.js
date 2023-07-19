@@ -44,7 +44,7 @@ export function CreateNewProjectElements(projectNameArg=' '){
     }
 
     let div = document.createElement('div');
-    div.className = "sidebar__container";
+    div.className = "sidebar__container sidebar__container-projects";
 
     let img = document.createElement('img');
     img.src = "./img/tag.svg";

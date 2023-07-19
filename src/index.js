@@ -14,8 +14,4 @@ addProjectObj.addProjectClick();
 let mainSections = new mainSectionsClass(taskData);
 mainSections.initialize();
 
-setUpLogin();
-
-console.log('testing secrets')
-
-console.log('secret token', process.env.SECRET_TOKEN)
+setUpLogin({taskData, addProjectObj, mainSections});

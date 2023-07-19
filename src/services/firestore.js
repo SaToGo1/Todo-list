@@ -10,7 +10,7 @@ export function createDocumentIfNotExists (user) {
             // if user don't exits -> create user.
             if(data.empty) {
                 const userData = {
-                    // userId: user.uid,
+                    userId: user.uid,
                     userName: user.displayName,
                     email: user.email,
                     tasks: '',
@@ -29,6 +29,51 @@ export function createDocumentIfNotExists (user) {
         })
 }
 
+export function store({ tasks = null, projects = null, user }) {
+    const usersRef = collection(db, "users");
+    // const q = query(usersRef, where("userId", "==", user.uid));
+    
+    const userData = {
+        userId: user.uid,
+        userName: user.displayName,
+        email: user.email,
+    }
+
+    if (tasks) {
+        userData = {
+            ...userData,
+            tasks: tasks,
+        }
+    }
+
+    if (projects) {
+        userData = {
+            ...userData,
+            projects: projects,
+        }
+    }
+
+    setDoc(doc(db, "users", user.uid), userData)
+    .then(result => {
+        console.log('data updated', result);
+    })
+
+    // getDocs(q)
+    //     .then(data => {
+    //         // if user don't exits -> create user.
+    //         if(data.empty) {
+    //             throw new Error ('trying to add a doc on a user that does not exist.')
+    //         }
+        
+    //     })
+}
+
+export function get() {
+    return {
+        tasks,
+        projects
+    }
+}
 /* 
 TODO
 - store project

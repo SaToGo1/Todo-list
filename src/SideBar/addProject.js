@@ -11,6 +11,7 @@ export default class addProject {
         //Confusing name (?)
         this.addProjectSidebarContainer = document.getElementById("sidebar__projects");
 
+        // Esto no es muy bueno.
         this.taskPageArray = [];
 
         this.taskData = taskData;
@@ -169,6 +170,12 @@ export default class addProject {
     }
 
     loadProjectFromStorage = () => {
+        const sidebarContainers = document.querySelectorAll('.sidebar__container-projects');
+        sidebarContainers.forEach(container => container.remove());
+        this.taskPageArray = [];
+
+        this.projectData.loadProjects();
+        
         let length = this.projectData.getLength();
 
         for(let i = 0; i < length; i++){

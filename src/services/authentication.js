@@ -16,7 +16,6 @@ export function signInWithGoogle() {
       .then((result) => {
         // Handle successful authentication
         const user = result.user;
-        console.log(user);
         createDocumentIfNotExists(user);
 
         return user;

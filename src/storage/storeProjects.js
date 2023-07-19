@@ -7,9 +7,11 @@ const StoreProjects = {
     initialLoad: () => {
         let isStoredData = false;
         let projectArray = [];
+        let user = getUser();
 
-        if (getUser()) {
-            console.log('loggedn in') //--------------------------------------------------------
+        if (user) {
+            console.log('loggedn in in storage projects if user') //--------------------------------------------------------
+            isStoredData = true;
         } else if (localStorage.getItem("projectArray") !== null) {
             isStoredData = true;
             JSON.parse(localStorage.getItem("projectArray"), (key, value) => {
@@ -27,9 +29,10 @@ const StoreProjects = {
     },
 
     saveNewProjectArray: (projectArray) => {
-        if (getUser()) {
-            console.log('loggedn in') //--------------------------------------------------------
-            
+        let user = getUser()
+
+        if (user) {
+            console.log('loggedn in in storage projects save new project') //--------------------------------------------------------
         } else {
             localStorage.setItem("projectArray", JSON.stringify(projectArray));
         }

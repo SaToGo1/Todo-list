@@ -24,7 +24,7 @@ function updateProfileImage (user) {
 }
 
 // EVENT
-function handleLogInClick (event) {
+function handleLogInClick ({event, taskData, addProjectObj, mainSections}) {
     // LOG IN BUTTON
     if (event.target.matches('#header__logInButton')) {
         try {
@@ -32,6 +32,9 @@ function handleLogInClick (event) {
             .then(user => {
                 setUser(user);
                 updateProfileImage(user);
+                taskData.loadTasks();
+                addProjectObj.loadProjectFromStorage();
+                mainSections.initialize();
             })
         }catch (err){
             console.log('log in not disponible \n', err);
@@ -50,11 +53,23 @@ function handleLogInClick (event) {
             .then(result => {
                 updateProfileImage(null);
                 setUser(null);
+                taskData.loadTasks();
+                addProjectObj.loadProjectFromStorage();
+                mainSections.initialize();
+                
             })
     }
 }
 
-export const setUpLogin = () => {
-    LoginDiv.addEventListener('click', handleLogInClick);
+export const setUpLogin = ({taskData, addProjectObj, mainSections}) => {
+    LoginDiv.addEventListener('click', (event) => {
+        handleLogInClick({event, taskData, addProjectObj, mainSections});
+    });
     updateProfileImage(null);
 }
+
+/*
+TODO
+- load project from storage on log in
+
+*/

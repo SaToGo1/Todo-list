@@ -45,4 +45,9 @@ export default class projectData {
     getTitleOnIndex = (i) => {
         return this.projectArray[i].getTitle();
     }
+
+    loadProjects = () => {
+        let { isStoredData, projectArray } = StoreProjects.initialLoad();
+        if (isStoredData) this.projectArray = [...projectArray];
+    }
 }

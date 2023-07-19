@@ -1,12 +1,15 @@
 import Task from "../Main/task";
+import { getUser } from "../config/user-config";
 
 const storeTasks = {
     initialLoad: () => {
         let isStoredData = false;
         let taskArray = [];
+        let user = getUser();
 
-        
-        if (localStorage.getItem("taskArray") !== null) {
+        if (user) {
+            isStoredData = true;
+        } else if (localStorage.getItem("taskArray") !== null) {
             let task;
             isStoredData = true;
             JSON.parse(localStorage.getItem("taskArray"), (key, value) => {
@@ -37,7 +40,13 @@ const storeTasks = {
     },
 
     saveNewTaskArray: (taskArray) => {
-        localStorage.setItem("taskArray", JSON.stringify(taskArray));
+        let user = getUser();
+
+        if (user) {
+            console.log('save task user logged')
+        } else {
+            localStorage.setItem("taskArray", JSON.stringify(taskArray));
+        }
     }
 }
 

@@ -111,4 +111,9 @@ export default class taskData {
 
         storeTasks.saveNewTaskArray(this.taskArray);
     }
+
+    loadTasks = () => {
+        let { isStoredData, taskArray } = storeTasks.initialLoad()
+        if (isStoredData) this.taskArray = [...taskArray];
+    }
 }
