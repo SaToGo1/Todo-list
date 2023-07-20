@@ -1,5 +1,5 @@
 import { db } from "../config/firebase-config";
-import { collection, getDocs, query, where, setDoc, doc } from "firebase/firestore"; 
+import { collection, getDocs, query, where, setDoc, doc, getDoc } from "firebase/firestore"; 
 
 export function createDocumentIfNotExists (user) {
     const usersRef = collection(db, "users");
@@ -30,10 +30,8 @@ export function createDocumentIfNotExists (user) {
 }
 
 export function store({ tasks = null, projects = null, user }) {
-    const usersRef = collection(db, "users");
-    // const q = query(usersRef, where("userId", "==", user.uid));
-    
-    const userData = {
+    console.log('firestore.js STORE')
+    let userData = {
         userId: user.uid,
         userName: user.displayName,
         email: user.email,
@@ -56,23 +54,15 @@ export function store({ tasks = null, projects = null, user }) {
     setDoc(doc(db, "users", user.uid), userData)
     .then(result => {
         console.log('data updated', result);
+        console.log('firestore.js STORE success')
     })
-
-    // getDocs(q)
-    //     .then(data => {
-    //         // if user don't exits -> create user.
-    //         if(data.empty) {
-    //             throw new Error ('trying to add a doc on a user that does not exist.')
-    //         }
-        
-    //     })
 }
 
-export function get() {
-    return {
-        tasks,
-        projects
-    }
+export async function get({user}) {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    return docSnap.data()
 }
 /* 
 TODO

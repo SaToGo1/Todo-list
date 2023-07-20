@@ -43,6 +43,8 @@ const storeTasks = {
         let user = getUser();
 
         if (user) {
+            let tasks = JSON.stringify(taskArray);
+            store({user, tasks})
             console.log('save task user logged')
         } else {
             localStorage.setItem("taskArray", JSON.stringify(taskArray));

@@ -5,9 +5,12 @@ import storeTasks from "../storage/storeTasks"
 export default class taskData {
     constructor(){        
         this.taskArray = [];
-        let { isStoredData, taskArray } = storeTasks.initialLoad()
-        if (isStoredData) this.taskArray = [...taskArray];
+        this.initialize();
+    }
 
+    async initialize() {
+        let { isStoredData, taskArray } = await storeTasks.initialLoad();
+        if (isStoredData) this.taskArray = [...taskArray];
     }
 
     saveTask = (taskTitle, pageName) => {

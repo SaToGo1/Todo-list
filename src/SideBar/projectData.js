@@ -46,8 +46,10 @@ export default class projectData {
         return this.projectArray[i].getTitle();
     }
 
-    loadProjects = () => {
-        let { isStoredData, projectArray } = StoreProjects.initialLoad();
-        if (isStoredData) this.projectArray = [...projectArray];
+    loadProjects = async () => {
+        let { isStoredData, projectArray } = await StoreProjects.initialLoad();
+        if (isStoredData) {
+            this.projectArray = [...projectArray]
+        }
     }
 }

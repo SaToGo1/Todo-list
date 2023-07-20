@@ -129,9 +129,12 @@ export default class addProject {
                 
 
                 // if actual taskpage is = to page deleted then reset content page.
-                let title = document.getElementsByClassName('content__page')[0].childNodes[0].innerText
-                if (projectName === title) {
-                    document.querySelector('.content__page').remove()
+                let childs = document.getElementsByClassName('content__page')[0].childNodes//[0].innerText
+                if (childs.length > 0) {
+                    let title = childs[0].innerText
+                    if (projectName === title) {
+                        document.querySelector('.content__page').remove()
+                    }
                 }
             })
 
@@ -171,14 +174,14 @@ export default class addProject {
         this.taskPageArray[index - 1].deleteAllTasksInPage(projectName);
     }
 
-    loadProjectFromStorage = () => {
+    loadProjectFromStorage = async () => {
         const sidebarContainers = document.querySelectorAll('.sidebar__container-projects');
         sidebarContainers.forEach(container => container.remove());
         this.taskPageArray = [];
 
-        this.projectData.loadProjects();
+        await this.projectData.loadProjects();
 
-        let length = this.projectData.getLength();
+        let length = await this.projectData.getLength();
 
         for(let i = 0; i < length; i++){
             let projectName = this.projectData.getTitleOnIndex(i);
