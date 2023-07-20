@@ -29,21 +29,40 @@ export function createDocumentIfNotExists (user) {
         })
 }
 
-export function store({ tasks = null, projects = null, user }) {
+export async function store({ tasks = null, projects = null, user }) {
     console.log('firestore.js STORE')
+    
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+    const data = docSnap.data()
+
+    // New User Data
     let userData = {
         userId: user.uid,
         userName: user.displayName,
         email: user.email,
+        tasks: data.tasks,
+        projects: data.projects
     }
 
+    // User Data already exists
+    if (docSnap.exists) {
+        userData = {
+            userId: user.uid,
+            userName: user.displayName,
+            email: user.email,
+            tasks: data.tasks,
+            projects: data.projects
+        }
+    }
+
+    // SAVE NEW PROJECTS AND TASKS
     if (tasks) {
         userData = {
             ...userData,
             tasks: tasks,
         }
     }
-
     if (projects) {
         userData = {
             ...userData,

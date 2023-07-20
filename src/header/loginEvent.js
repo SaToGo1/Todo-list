@@ -32,9 +32,12 @@ function handleLogInClick ({event, taskData, addProjectObj, mainSections}) {
             .then(user => {
                 setUser(user);
                 updateProfileImage(user);
-                taskData.loadTasks();
-                addProjectObj.loadProjectFromStorage();
-                mainSections.loadHome();
+                taskData.loadTasks()
+                addProjectObj.loadProjectFromStorage()
+                    .then(() => {
+                        // So it don't load home prev logged
+                        mainSections.loadHome();
+                    })
             })
         }catch (err){
             console.log('log in not disponible \n', err);
@@ -53,10 +56,12 @@ function handleLogInClick ({event, taskData, addProjectObj, mainSections}) {
             .then(result => {
                 updateProfileImage(null);
                 setUser(null);
-                taskData.loadTasks();
-                addProjectObj.loadProjectFromStorage();
-                mainSections.loadHome();
-                
+                taskData.loadTasks()
+                addProjectObj.loadProjectFromStorage()
+                    .then(
+                        // So it don't load home prev sign out
+                        mainSections.loadHome()
+                    )
             })
     }
 }

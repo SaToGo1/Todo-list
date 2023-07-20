@@ -12,6 +12,8 @@ let addProjectObj = new addProject(taskData);
 addProjectObj.addProjectClick();
 
 let mainSections = new mainSectionsClass(taskData);
-mainSections.initialize();
+// timeout so it gets in the queue of async events and loads
+// the page after all the project / task data is loaded.
+setTimeout(() => mainSections.initialize(), 1);
 
 setUpLogin({taskData, addProjectObj, mainSections});
