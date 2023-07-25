@@ -58,10 +58,11 @@ function handleLogInClick ({event, taskData, addProjectObj, mainSections}) {
                 setUser(null);
                 taskData.loadTasks()
                 addProjectObj.loadProjectFromStorage()
-                    .then(
+                    .then(() => {
                         // So it don't load home prev sign out
+                        console.log('testing sing out')
                         mainSections.loadHome()
-                    )
+                    })
             })
     }
 }
