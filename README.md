@@ -2,8 +2,7 @@
 To-do List App.
 
 ## Version 2 (In Progress)
-A version with a cleaner code and a proper MVC architecture.
-
+A version with a cleaner code and a proper MVC architecture.  
 [To-Do List Version 2](https://github.com/SaToGo1/todo-list-version2)
 
 ## Technology stack
