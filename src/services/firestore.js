@@ -83,11 +83,3 @@ export async function get({user}) {
 
     return docSnap.data()
 }
-/* 
-TODO
-- store project
-- store tasks
-
-- get tasks
-- get projects
-*/ 
